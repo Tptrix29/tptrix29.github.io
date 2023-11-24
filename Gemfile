@@ -35,7 +35,6 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 gem "webrick", "~> 1.8"
 
-gem "minimal-mistakes-jekyll"
 
 group :jekyll_plugins do
   # gem "jekyll-feed"
@@ -46,3 +45,9 @@ group :jekyll_plugins do
   gem "jekyll-algolia"
   gem "jekyll-archives"
 end
+
+gem "jekyll-include-cache", group: :jekyll_plugins
+
+# Local 
+# gem "minimal-mistakes-jekyll"
+
