@@ -1,14 +1,15 @@
 ---
 title:  "Advanced SQL"
-date:   2022-6-21 -0500
+date:   2022-06-21 -0500
 author: Pei Tian
 categories: programming
 tags: SQL 
+author: Pei Tian
 header:
     teaser: /assets/img/training-guidence.png
 ---
 
-### Advanced Grammer
+Advanced SQL Syntax
 
 ### Mathematic Functions
 

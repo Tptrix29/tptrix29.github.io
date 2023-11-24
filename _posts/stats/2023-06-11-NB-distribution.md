@@ -2,6 +2,8 @@
 title:  "Negative Bionominal Distribution"
 date:   2023-06-11 -0500
 categories: statistics
+tags: RV distribution
+author: Pei Tian
 header:
     teaser: /assets/img/distributions.png
 ---
