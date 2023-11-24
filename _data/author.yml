@@ -1,0 +1,14 @@
+Pei Tian:
+  name        : "Pei Tian"
+  bio         : "Master student at Columbia University"
+  avatar      : "/assets/img/bio.jpg"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:tpzl0222@gmail.com"
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://tptrix29.github.io/"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/extravagantman"
