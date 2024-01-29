@@ -4,12 +4,11 @@ date:   2022-06-21 -0500
 author: Pei Tian
 categories: programming
 tags: SQL 
-author: Pei Tian
 header:
     teaser: /assets/img/training-guidence.png
 ---
 
-Advanced SQL Syntax
+## Advanced SQL Syntax
 
 ### Mathematic Functions
 
@@ -67,11 +66,15 @@ Advanced SQL Syntax
 ### Time Functions
 
 ```sql
- DATEDIFF(d1, d2)  -- d1 - d2
+ NOW()
+ FORMAT(NOW(), "%Y-%m-%d")
+ 
+ DATEDIFF(d1, d2)  -- d1 - d2
  TIMEDIFF(t1, t2)
  
  ADDDATE(d, n)
  ADDDATE(d, INTERVAL n TYPE)
+ -- SELECT ADDDATE(CURRENT(), INTERVAL 3 MONTH)
  SUBDATE(d, n)
  SUBDATE(d, INTERVAL n TYPE)
 ```
@@ -117,7 +120,7 @@ Advanced SQL Syntax
  DECODE(crypt_str, pswd_str)
 ```
 
-### Window Function
+## Window Function
 
 ### Definition
 
@@ -174,3 +177,8 @@ Advanced SQL Syntax
 ```
 
 ## Regexp
+
+```SQL
+SELECT * FROM [table] WHERE [VAR] REGEXP '^\d-';
+```
+

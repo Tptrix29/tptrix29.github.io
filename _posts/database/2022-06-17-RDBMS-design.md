@@ -4,7 +4,6 @@ date:   2022-06-17 -0500
 author: Pei Tian
 categories: database 
 tags: SQL RDBMS
-author: Pei Tian
 header:
     teaser: /assets/img/training-guidence.png
 ---
