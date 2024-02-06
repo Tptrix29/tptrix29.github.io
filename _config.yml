@@ -180,7 +180,7 @@ defaults:
 author:
   name             : "Pei Tian"
   avatar           : /assets/img/bio.jpeg
-  bio              : "Candidate Master Student at *Columbia University*."
+  bio              : "Master Student at *Columbia University*."
   location         : "New York City, NY, USA"
   # email            : "pei.tian@columbia.edu"
   links:
@@ -202,6 +202,9 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/pei-tian-41177028a/"
 
 # Site Footer
 footer:
@@ -224,3 +227,6 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: https://www.linkedin.com/in/pei-tian-41177028a/

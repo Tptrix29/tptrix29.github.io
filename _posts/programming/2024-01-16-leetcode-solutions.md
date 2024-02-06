@@ -1,5 +1,6 @@
 ---
-title:  "Leetcode Coding Solution Notes"
+title:  "Leetcode Solution"
+layout: single
 date:   2024-01-16 -0500
 author: Pei Tian
 categories: programming
@@ -7,6 +8,8 @@ tags: leetcode python programming
 header:
     teaser: /assets/img/training-guidence.png
 ---
+
+Leetcode Practice Record
 
 ## Problem List Notes
 Longest substring without repeated character: use 2 pointers to maintain set of char composition and update satisfying substring
@@ -21,6 +24,12 @@ Reverse integer: negative transition, range alert, negative mode & divide calcul
 
 remove n-th tail node of list: fast & slow pointers
 
+Parenthesis generation: DFS, control left and right parenthesis count
+
+Next Permutation: find location from the right side
+
+Reverse ListNode: dummy head, prev node
+
 
 ## Solutions
 
@@ -28,12 +37,20 @@ remove n-th tail node of list: fast & slow pointers
 
 ##### Strategy
 
+*digit-wise arithmetic addition*
 
+Clarify each step for arithmetic addition 
 
 ##### Python3
 
 ```python
-def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         add_digit = 0
         head = ListNode()
         result = head
@@ -53,6 +70,7 @@ def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optio
         if add_digit:
             result.next = ListNode(val = add_digit)
         return head.next
+        
 ```
 
 
@@ -61,10 +79,19 @@ def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optio
 
 ##### Strategy
 
+*Set Maintainance + Double Pointers*
+
+Maintain the set of character composition
+
+Locate the substring with 2 pointers
+
+While meeting same character which already exists in composition set, shift the left pointer until there is no repeated character
+
 ##### Python3
 
 ```python
-def lengthOfLongestSubstring(self, s: str) -> int:
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
         if len(s) <= 1:
             return len(s)
         chr_set = set()
@@ -81,38 +108,55 @@ def lengthOfLongestSubstring(self, s: str) -> int:
         return opt
 ```
 
+##### Java
+
+```java
+```
+
 
 
 #### [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
 ##### Strategy
 
+*Divide-and-conquer*
 
+Boundary condition
+
+Odd-count / Even-count handing
 
 ##### Python3
 
 ```python
-def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+      	# target global shift count
         k = (len(nums1) + len(nums2)) // 2 + 1
-        p1 = p2 = 0
+        p1 = p2 = 0	# pointer
+        # shift pointer 
         while (p1 < len(nums1) or p2 < len(nums2)) and k > 1:
             m = k // 2
+            # nums1 count to the end
             if p1 >= len(nums1):
                 p2 += m
                 k -= m
+            # nums2 count to the end
             elif p2 >= len(nums2):
                 p1 += m
                 k -= m
+           	# nums1 and nums2 both have remained number
             else:
+              	# potential position after shifting
                 i1 = min(len(nums1), p1 + m)
                 i2 = min(len(nums2), p2 + m)
+                # shift the pointer to position with smaller value
                 if nums1[i1-1] > nums2[i2-1]:
                     k = k - i2 + p2
                     p2 = i2
                 else:
                     k = k - i1 + p1
                     p1 = i1
-
+				# calculate next value in order
         if p1 >= len(nums1):
             next_val = nums2[p2]
         elif p2 >= len(nums2):
@@ -120,11 +164,15 @@ def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         else:
             next_val = min(nums1[p1], nums2[p2])
         
+        # odd count 
         if (len(nums1) + len(nums2)) % 2:
             return float(next_val)
+        # even count
         else:
+          	# No number in front of p1 position in nums1
             if p1 == 0:
                 return (next_val + nums2[p2 - 1]) / 2
+            # No number in front of p2 position in nums2
             elif p2 == 0:
                 return (next_val + nums1[p1 - 1]) / 2
             else:
@@ -137,12 +185,17 @@ def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
 
 ##### Strategy
 
+*Property of palindromic substring (**search from center**)*
 
+**Extend the palindromic string from potential substring center**
+
+Attention: the slot between the characters could also become the center!  
 
 ##### Python3
 
 ```python
-def longestPalindrome(self, s: str) -> str:
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
         def expandFromCenter(l: int, r: int) -> int:
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 l -= 1
@@ -161,18 +214,30 @@ def longestPalindrome(self, s: str) -> str:
                 max_len = len(str2)
                 max_palindrome = str2
         return max_palindrome
+        
 ```
+
+
 
 #### [Zigzag Conversion](https://leetcode.com/problems/zigzag-conversion/)
 
 ##### Strategy
 
+*Formula Reasoning*
 
+Periodic Formula: 
+
+$T = 2 *(\#rows - 1) $
+
+$\#T = ceil(length / T)$
+
+Reconstruct the string according to location of characters
 
 ##### Python3
 
 ```python
-def convert(self, s: str, numRows: int) -> str:
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
         if numRows == 1:
             return s
         T = 2 * numRows - 2
@@ -180,29 +245,76 @@ def convert(self, s: str, numRows: int) -> str:
         result = ""
         for i in range(numRows):
             for j in range(n):
-                if i == 0 or i == (numRows - 1):
-                    result += s[j * T + i] if j * T + i < len(s) else ""
-                else:
-                    result += s[j * T + i] if j * T + i < len(s) else ""
+                result += s[j * T + i] if j * T + i < len(s) else ""
+                if i != 0 and i != (numRows - 1):
                     result += s[(j+1) * T - i] if (j+1) * T - i < len(s) else ""
-        return result
+        return result                
 ```
+
+##### Java
+
+```java
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1){
+            return s;
+        }
+        int T = 2 * numRows - 2;
+        int n = s.length() / T + 1;
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < numRows; i++){
+            for(int j = 0; j < n; j++){
+                if(j * T + i < s.length()){
+                    result.append(s.charAt(j * T + i));
+                }
+                if(i != 0 && i != numRows - 1){
+                    if((j + 1) * T - i < s.length()){
+                        result.append(s.charAt((j + 1) * T - i));
+                    }
+                }
+            }
+        }
+        return result.toString();
+    }
+}
+```
+
+
 
 #### [Reverse Integer](https://leetcode.com/problems/reverse-integer/)
 
 ##### Strategy
 
+*Some tricks*
 
+- Postive -> Negative
+- Modulus calculation for negative
+- Overflow check
+
+Attention: modulus and divide is **DIFFERENT** in Java and Python!
+
+> Python:
+>
+> -17 // 10 = -2
+>
+> -17 % 10 = 3
+>
+> Java
+>
+> -17 // 10 = -1
+>
+> -17 % 10 = -7
 
 ##### Python3
 
 ```python
-def reverse(self, x: int) -> int:
+class Solution:
+    def reverse(self, x: int) -> int:
         if x == 0 or x > 2 ** 31 - 1 or x < -2 ** 31:
             return 0
         positive = True if x > 0 else False
         x = -x if positive else x
-        digits = []
+        result = 0
         while x != 0:
             resid = x % 10 - 10
             if resid == -10:
@@ -210,11 +322,7 @@ def reverse(self, x: int) -> int:
                 x = x // 10
             else:
                 x = x // 10 + 1
-            digits.append(resid)
-        result = 0
-        
-        for i in range(len(digits)):
-            result += digits[i] * 10 ** (len(digits) - i - 1)
+            result = result * 10 + resid
         result = -result if positive else result
         return 0 if result > 2 ** 31 - 1 or result < -2 ** 31 else result
 ```
@@ -227,12 +335,13 @@ def reverse(self, x: int) -> int:
 
 ##### Strategy
 
-
+*Overflow handling*
 
 ##### Python3
 
 ```python
-def myAtoi(self, s: str) -> int:
+class Solution:
+    def myAtoi(self, s: str) -> int:
         s = s.lstrip()
         if len(s) == 0:
             return 0
@@ -260,7 +369,7 @@ def myAtoi(self, s: str) -> int:
         elif num < min_int32:
             return min_int32
         else:
-            return num   
+            return num      
 ```
 
 
@@ -269,12 +378,17 @@ def myAtoi(self, s: str) -> int:
 
 ##### Strategy
 
+*Greedy + Double Pointers*
 
+Start searching from the outermost planks, then substitute the shorter plank and calculate the potential largest area
+
+DP is too time-consuming!
 
 ##### Python3
 
 ```python
-def maxArea(self, height: List[int]) -> int:
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
         if len(height) < 2:
             return 0
         left = 0
@@ -302,7 +416,8 @@ def maxArea(self, height: List[int]) -> int:
 ##### Python3
 
 ```python
-def threeSum(self, nums: List[int]) -> List[List[int]]:
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         if len(nums) < 3:
             return []
         nums = sorted(nums)
@@ -328,6 +443,7 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
                 else:
                     j += 1
         return results
+        
 ```
 
 
@@ -341,7 +457,8 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 ##### Python3
 
 ```python
-def threeSumClosest(self, nums: List[int], target: int) -> int:
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
         if len(nums) < 3: 
             return []
         nums.sort()
@@ -377,7 +494,8 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:
 ##### Python3
 
 ```python
-def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         l = len(nums)
         if l < 4:
             return []
@@ -404,23 +522,24 @@ def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
                     else:
                         n -= 1
 
-        return results
+        return results   
 ```
 
 
 
 
 
-#### [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+#### [Remove N-th Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 
 ##### Strategy
 
-
+*Double Pointers (Fast & slow)*
 
 ##### Python3
 
 ```python
-def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         if not head:
             return None
         node = head
@@ -444,12 +563,13 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
 
 ##### Strategy
 
-
+*Stack*
 
 ##### Python3
 
 ```python
-def isValid(self, s: str) -> bool:
+class Solution:
+    def isValid(self, s: str) -> bool:
         if len(s) == 0:
             return True
         parentheses_pair = {'(': ')', '[': ']', '{': '}'}
@@ -463,7 +583,7 @@ def isValid(self, s: str) -> bool:
                     stack.pop()
                 else:
                     return False
-        return False if stack else True
+        return False if stack else True    
 ```
 
 
@@ -474,38 +594,37 @@ def isValid(self, s: str) -> bool:
 
 ##### Strategy
 
+*DFS Searching*
 
+Use 2 variables to record the count of left & right parentheses 
+
+- When $\#left < n$, append a `(` and generate a searching branch
+- When $\#right < \#left$, append a `)` and generate a searching branch
+
+Terminate condition: $length(string) = 2n$​
+
+> Validity is guaranteed by the calling stack
 
 ##### Python3
 
 ```python
-def generateParenthesis(self, n: int) -> List[str]:
-        # if n == 1:
-        #     return ["()"]
-        # results = []
-        # for prev in self.generateParenthesis(n-1):
-        #     for i in range(len(prev)):
-        #         if prev[i] == ')':
-        #             s = prev[:i] + '()' + prev[i:]
-        #             if s not in results:
-        #                 results.append(s)
-        #     results.append(prev + '()')
-        # return results
-
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
         def dfs(l: int, r: int, s):
             if len(s) == n * 2:
                 res.append(s)
                 return
-        
+        		# left parenthese is insufficient
             if l < n:
                 dfs(l+1, r, s + '(')
-            
+            # right parethese is insufficient
             if r < l:
                 dfs(l, r+1, s + ')')
             
         res = []
         dfs(1, 0, '(')
         return res
+        
 ```
 
 
@@ -516,12 +635,24 @@ def generateParenthesis(self, n: int) -> List[str]:
 
 ##### Strategy
 
+*Heap usage*
 
+Optimized data structure for max/min value
 
 ##### Python3
 
 ```python
-def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+    
+ListNode.__lt__ = lambda a, b: a.val < b.val
+
+
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         current = dummy = ListNode(val = -2**63)
 
         # Method 1: Heap
@@ -580,7 +711,8 @@ def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
 ##### Python3
 
 ```python
-def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
         assist_head = ListNode(0, head)
@@ -597,6 +729,7 @@ def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
                 node1, node2 = node1.next, node2.next
                 # prev, node1, node2, post = prev.next, node1.next, node2.next, post.next
         return assist_head.next
+
 ```
 
 
@@ -607,12 +740,18 @@ def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
 ##### Strategy
 
+*Double Pointers*
 
+**Reverse List**:
+
+1. store post node
+2. 
 
 ##### Python3
 
 ```python
-def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         def reverse(head):
             prev = None
             current = head
@@ -640,6 +779,8 @@ def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
             end = prev = start
             count = 0
         return dummy.next
+
+        
 ```
 
 
@@ -653,7 +794,8 @@ def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
 ##### Python3
 
 ```python
-def removeDuplicates(self, nums: List[int]) -> int:
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
         i = 0
         # maintain array
         # array slice: new space
@@ -685,14 +827,19 @@ def removeDuplicates(self, nums: List[int]) -> int:
 
 #### [Next Permutation](https://leetcode.com/problems/next-permutation/)
 
+*Property of permutation*
+
 ##### Strategy
 
-
+1. Find the first peak element from right side, set element BEFORE peak element ($e_1$)
+2. Swap $e_1$ and the smallest element which is great than $e_1$ in right side
+3. Reverse right side array
 
 ##### Python3
 
 ```python
-def nextPermutation(self, nums: List[int]) -> None:
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
@@ -732,7 +879,7 @@ def nextPermutation(self, nums: List[int]) -> None:
 
         # step4: reverse right half after break-point
         if i+1 < len(nums) - 1:
-            nums[i+1:] = reverse(nums[i+1:])
+            nums[i+1:] = reverse(nums[i+1:]) 
 ```
 
 
@@ -741,12 +888,15 @@ def nextPermutation(self, nums: List[int]) -> None:
 
 ##### Strategy
 
-
+1. Use stack to find valid substrings
+2. Store the start and end index of valid substrings
+3. Find longest substring by retrieving the index
 
 ##### Python3
 
 ```python
-def longestValidParentheses(self, s: str) -> int:
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
         if len(s) < 2:
             return 0
         stack = []
@@ -764,8 +914,7 @@ def longestValidParentheses(self, s: str) -> int:
         longest = 0
         r, l = len(s), 0
         while stack:
-            l = stack[-1]
-            stack.pop()
+            l = stack.pop()
             longest = max(r-l-1, longest)
             r = l
         longest = max(longest, r)
@@ -779,79 +928,711 @@ def longestValidParentheses(self, s: str) -> int:
 
 
 
-#### 
+#### [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 
 ##### Strategy
 
+*Divide-and-conquer*
 
+Compare the values of `left` position and `right `position to determine whether searching in monotone array range
+
+**NOTICE: ** searching range preference for divide-and-conquer strategy is $[left, right)$.
 
 ##### Python3
 
 ```python
-
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        def searchRange(nums: List[int], left: int, right: int, target: int) -> int:
+            if right - left <= 1:
+                return left if len(nums) > 0 and nums[left] == target else -1
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[left] > nums[right-1]:
+                ind1, ind2 = searchRange(nums, left, mid, target), searchRange(nums, mid, right, target)
+                return ind1 if ind1 != -1 else ind2
+            else:
+                if target < nums[mid]:
+                    return searchRange(nums, left, mid, target)
+                else:
+                    return searchRange(nums, mid, right, target)
+        
+        return searchRange(nums, 0, len(nums), target)    
 ```
 
 
 
 
 
-#### 
+#### [Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
 ##### Strategy
+
+*Divide-and-conquer*
+
+Search for lower and upper bounds seperately
+
+**NOTICE**: returning list created in function should be avoided (stack memory released => return `None`)
 
 
 
 ##### Python3
 
 ```python
-
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def searchBound(nums: List[int], left: int, right: int, target: int, mode: str) -> List[int]:
+            if right - left <= 1:
+                return left if len(nums) > 0 and nums[left] == target else -1
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                if mode == "r":
+                    if mid >= right-1 or nums[mid+1] > target:
+                        return mid
+                    else:
+                        return searchBound(nums, mid, right, target, mode)
+                else:
+                    if mid == left or nums[mid-1] < target:
+                        return mid
+                    else:
+                        return searchBound(nums, left, mid, target, mode)
+            if target < nums[mid]:
+                return searchBound(nums, left, mid, target, mode)
+            else:
+                return searchBound(nums, mid, right, target, mode)
+        
+        lb = searchBound(nums, 0, len(nums), target, 'l')
+        ub = searchBound(nums, 0, len(nums), target, 'r')
+        return [lb, ub]
 ```
 
-#### 
+
+
+#### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
 
 ##### Strategy
 
-
+check row/column/sub-block validity separately
 
 ##### Python3
 
 ```python
-
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        def checkSubBox(board, x, y):
+            elements = []
+            for i in range(3):
+                for j in range(3):
+                    char = board[3*x+i][3*y+j]
+                    if char != '.':
+                        if char in elements:
+                            return False
+                        else:
+                            elements.append(char)
+            return True
+        
+        
+        for i in range(9):
+            elements1 = []
+            elements2 = []
+            for j in range(9):
+                char1, char2 = board[i][j], board[j][i]
+                if char1 != '.':
+                    if char1 in elements1:
+                        return False
+                    else:
+                        elements1.append(char1)
+                if char2 != ".":
+                    if char2 in elements2:
+                        return False
+                    else:
+                        elements2.append(char2)
+        for i in range(3):
+            for j in range(3):
+                check = checkSubBox(board, i, j)
+                if not check:
+                    return False
+        
+        return True
+        
+        
 ```
 
-#### 
+
+
+#### [Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
 
 ##### Strategy
 
+*HaspMap + Sliding Window*
 
+Start from different location for window sliding
 
 ##### Python3
 
 ```python
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        def checkDiff(diff):
+            for i in diff.values():
+                if i:
+                    return False
+            return True
 
+        wordlen = len(words[0])
+        count = len(words)
+        if len(s) < wordlen * count:
+            return []
+
+        # target hashmap
+        target_dict = {}
+        for word in words:
+            if word in target_dict.keys():
+                target_dict[word] += 1
+            else:
+                target_dict[word] = 1
+        
+        results = []
+        # each possible window
+        for begin in range(wordlen):
+            diff_dict = target_dict.copy()
+            # sliding window for word
+            for i in range(begin, len(s), wordlen):
+                if i + wordlen <= len(s):
+                    word = s[i:i + wordlen]
+                else:
+                    break
+                prev = s[i - wordlen*count:i - wordlen*(count-1)] if i - wordlen*count >= 0 else None
+                if word in diff_dict.keys():
+                    diff_dict[word] -= 1
+                    if prev in diff_dict.keys():
+                        diff_dict[prev] += 1
+                    if checkDiff(diff_dict):
+                        results.append(i - wordlen * (count - 1))
+                else:
+                    if prev in diff_dict.keys():
+                        diff_dict[prev] += 1
+        return results
 ```
 
-#### 
+
+
+#### [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)
 
 ##### Strategy
 
+*BackTrack*
 
+Improvement: 
+
+- pruning
+- use list to store status of each row/column/block
 
 ##### Python3
 
 ```python
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def checkValidity(board, i, j, char):
+            for x in range(9):
+                if board[i][x] == char or board[x][j] == char:
+                    return False
+            r, c = i // 3, j // 3
+            for x in range(3):
+                for y in range(3):
+                    if board[3 * r + x][3 * c + y] == char:
+                        return False
+            return True
 
+        def solve(board):
+            for i in range(9):
+                for j in range(9):
+                    if board[i][j] == '.':
+                        for k in range(1, 10):
+                            if checkValidity(board, i, j, str(k)):
+                                board[i][j] = str(k)
+                                if solve(board):
+                                    return True
+                                else:
+                                    board[i][j] = "."
+                        return False
+            return True
+        solve(board)
+                           
+        
 ```
 
-#### 
+
+
+#### [Count and Say](https://leetcode.com/problems/count-and-say/)
 
 ##### Strategy
 
-
+*Recursive*
 
 ##### Python3
 
 ```python
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        if n == 1:
+            return "1"
+        s = self.countAndSay(n-1)
+        result = ""
+        start = end = 0
+        while end < len(s):
+            while end < len(s) and s[start] == s[end]:
+                end += 1
+            result += str(end-start) + s[start]
+            start = end
+        return result
+```
+
+
+
+#### [Combination Sum](https://leetcode.com/problems/combination-sum/)
+
+##### Strategy
+
+*Recursive* + *Pruning*
+
+Remove the used element from the search range in specific recursive layer
+
+##### Python3
+
+```python
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def combSum(target: int, search: List[int]) -> List[List[int]]:
+          	# invalid
+            if target <= 0:
+                return []
+            results = []
+            search_range = search.copy()
+            for e in search:
+                # impossible to meet summation requirement
+                if e > target:
+                    continue 
+                # Exact result
+                if e == target:
+                    results.append([e])
+                # search in next layer
+                else:
+                    results.extend([sorted(arr) + [e] for arr in combSum(target - e, search_range)])
+                # remove the used element for searching branch in this layer
+                search_range.remove(e)
+            return results
+
+        return combSum(target, candidates)
+                        
+            
+        
+```
+
+
+
+#### [Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
+
+##### Strategy
+
+*Recursive* + *Pruning*
+
+Handling duplicate elements: (analyze specific layer)
+
+- remove ONE element when initialize searching branch from it
+- allow duplicate element exists in SUB-LAYER
+- NOT allow duplicate elements exists in SAME layer
+
+##### Python3
+
+```python
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def combSum(target: int, search: List[int]) -> List[List[int]]:
+          	# invalid
+            if target <= 0:
+                return []
+            results = []
+            search_range = search.copy()
+            for e in set(search):
+                # impossible to meet summation requirement
+                search_range.remove(e)
+                if e > target:
+                    continue 
+                # Exact result
+                if e == target:
+                    results.append([e])
+                # search in next layer
+                else:
+                    results.extend([sorted(arr) + [e] for arr in combSum(target - e, search_range)])
+                while e in search_range:
+                    search_range.remove(e)
+            return results
+        candidates.sort()
+        return combSum(target, candidates)
+```
+
+
+
+#### [Multiply Strings](https://leetcode.com/problems/multiply-strings/)
+
+##### Strategy
+
+decompose multiply steps
+
+##### Python3
+
+```python
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        result = 0
+        i = len(num1) - 1
+        while i >= 0:
+            j = len(num2)-1
+            addition = 0
+            partial = 0
+            while j >= 0:
+                product = int(num1[i]) * int(num2[j]) + addition
+                partial += (product % 10) * (10 ** (len(num2)-1-j)) 
+                addition = product // 10
+                j -= 1
+            partial += addition * (10 ** (len(num2)))
+            result += partial * (10 ** (len(num1)-1-i))
+            i -= 1
+        return str(result)
+        
 
 ```
+
+
+
+#### [First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
+
+##### Strategy
+
+Maintain the array with specific property which is beneficial for problem solving
+
+Target property: array $A$, $\forall A[i] =x \in [1, N], 0 \le i < N$,  $A[x-1] = x$​
+
+##### Python3
+
+```python
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+      	# maintain each location
+        for i in range(len(nums)):
+          	# swap location until the property is set
+            while 1 <= nums[i] <= len(nums) and nums[i] != nums[nums[i] - 1]:
+                tmp = nums[i]
+                nums[i] = nums[tmp-1]
+                nums[tmp-1] = tmp
+        # search for first-missing value
+        for i in range(len(nums)):
+            if nums[i] != i+1:
+                return i+1
+        return len(nums)+1
+
+```
+
+
+
+#### [ Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+
+##### Strategy
+
+1. Determine left plank, and increase partial trapped volume step-wise
+2. If exists right plank (which is higher than left plank), add trapped volume, then set this right plank as new left plank
+3. If doesn't exist right blank, **reverse** the height array starting from **latest** left plank and calculate trapped water in this subrange recursively.
+
+##### Python3
+
+```python
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        # calculate trapped water
+        def subTrap(height):
+            if len(height) <= 1:
+                return 0
+            i = total = volume = 0
+            # determine first left plank
+            while not height[i]:
+                i += 1
+            init, left = i, height[i]
+            for k in range(i, len(height)):
+                # update potential volume
+                if height[k] < left:
+                    volume += left - height[k]
+                # find valid right plank
+                else:
+                    total += volume     # update trapped volume
+                    init = k    # update latest left plank location
+                    left = height[k]    # update left plank
+                    volume = 0     # reset potential volume
+            # unclosed subrange
+            if volume:
+                # calculate trapped water in reversed subrange
+                total += subTrap(height[-1:init - 1:-1]) if init > 0 else subTrap(height[::-1])
+            return total
+        
+        return subTrap(height) 
+        
+```
+
+
+
+## Dynamic Programming
+
+### Basic Study Plan
+
+#### [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+
+##### Recursive Formula
+
+$N[n] = N[n-1] + N[n-2], n> 2$
+
+$N[0] = 0, N[1] = 1, N[2] = 2$
+
+##### Python3
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        dp = [0, 1, 2]
+        for i in range(3, n+1):
+            dp.append(dp[i-1] + dp[i-2])
+        return dp[n]
+```
+
+#### [Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)
+
+##### Recursive Formula
+
+$F[n] = F[n-1] + F[n-2], n > 1$
+
+$F[0] = 0, F[1] = 1$
+
+##### Python3
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n == 1 or n == 2:
+            return n
+        # store result for reusage
+        count = [0] * (n+1)
+        count[1], count[2] = 1, 2 
+        # climb submodule
+        def climb(n):
+            if not count[n]:
+                count[n] = climb(n-1) + climb(n-2)
+            return count[n]
+        return climb(n)
+```
+
+#### [N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number/)
+
+##### Recursive Formula
+
+$F[n] = F[n-1] + F[n-2], n \ge 2$
+
+$F[0] = 0, F[1] = 1$
+
+##### Python3
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n == 1 or n == 2:
+            return n
+        # store result for reusage
+        count = [0] * (n+1)
+        count[1], count[2] = 1, 2 
+        # climb submodule
+        def climb(n):
+            if not count[n]:
+                count[n] = climb(n-1) + climb(n-2)
+            return count[n]
+        return climb(n)
+```
+
+#### [Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/)
+
+##### Recursive Formula
+
+$OPT[i] = \min\{OPT[i-1] +cost[i-1], OPT[i-2] +cost[i-2]\}, i \ge 2$​
+
+$OPT[0] = OPT[1] = 0$
+
+##### Python3
+
+```python
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        n = len(cost)
+        opt = [0] * (n+1)
+        for i in range(2, n+1):
+            opt[i] = min(opt[i-1] + cost[i-1], opt[i-2] + cost[i-2])
+        return opt[n]  
+        
+```
+
+#### [House Robber](https://leetcode.com/problems/house-robber/)
+
+##### Recursive Formula
+
+$$
+OPT[i] = \max \cases{
+	\displaystyle \max_{0\le j \le i-2}\{OPT[j] + nums[i]\}, \text{rob $i$-th house}\\
+	\displaystyle \max_{0 \le j \le i -1}\{OPT[j]\}, \text{Not rob $i$-th house}
+}, 0\le i < n
+$$
+
+##### Python3
+
+```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        opt = [0] * (n)
+        opt[0] = nums[0]
+        for i in range(1, n):
+            # rob i-th house
+            max_rob = max(opt[:i-1]) + nums[i] if i > 1 else nums[i]
+            # not rob i-th house & update 
+            opt[i] = max(max(opt[:i]), max_rob)
+        return opt[n-1]
+```
+
+#### [Delete and Earn](https://leetcode.com/problems/delete-and-earn/)
+
+##### Recursive Formula
+
+Denote $V$ as sorted values in $nums$, $n = |V|$
+$$
+OPT[i] = \max \cases{
+	\displaystyle \cases{
+		OPT[i-2]+ V[i-1] * \# V[i-1], \text{if $V[i-1] = V[i+2]+1$}\\
+		OPT[i-1]+ V[i-1] * \# V[i-1], \text{if $V[i-1] \neq V[i+2]+1$}
+	}, \text{delete $V[i]$}\\
+	\displaystyle OPT[i-1], \text{Not delete $V[i]$}
+}, 0\le i \le n
+$$
+
+##### Python3
+
+```python
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        counter = Counter(nums)
+        vals = sorted(counter.keys())
+        opt = [0] * (len(vals) + 1)
+        for i in range(1, len(vals)+1):
+            score = vals[i-1] * counter[vals[i-1]]
+            if vals[i-1] != vals[i-2]+1:
+                opt[i] = max(opt[i-1], opt[i-2]) + score
+            else:
+                opt[i] = max(opt[i-1], opt[i-2] + score)
+        return opt[-1]
+```
+
+#### [Unique Paths](https://leetcode.com/problems/unique-paths/)
+
+##### Recursive Formula
+
+$grid[i][j] = grid[i][j-1] + grid[i-1][j], 0<i<m, 0<j<n$​
+
+$grid[i][0] = 1, grid[0][j] = 1, 0<i<m, 0<j<n$​
+
+Fill order: row by row / column by column
+
+> Notice: initialization of matrix 
+
+##### Python3
+
+```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        grid = [[1 for _ in range(n)] for _ in range(m)]
+        for i in range(1, m):
+            for j in range(1, n):
+                grid[i][j] = grid[i-1][j] + grid[i][j-1]
+        return grid[m-1][n-1]
+```
+
+
+
+#### [Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
+
+##### Recursive Formula
+
+$OPT[i][j] = \min \{OPT[i-1][j], OPT[i][j-1]\} + grid[i][j], 0<i<m, 0<j<n$
+
+$OPT[0][0] = grid[0][0]$
+
+$OPT[i][0] = OPT[i-1][0] + grid[i][0], 0<i<m$
+
+$OPT[0][j] = OPT[0][j-1] + grid[0][j], 0<j<n$
+
+##### Python3
+
+```python
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        opt = [[grid[0][0] for _ in range(n)] for _ in range(m)]
+        for i in range(1, m):
+            opt[i][0] = opt[i-1][0] + grid[i][0]
+        for j in range(1, n):
+            opt[0][j] = opt[0][j-1] + grid[0][j]
+        for i in range(1, m):
+            for j in range(1, n):
+                opt[i][j] = min(opt[i][j-1], opt[i-1][j]) + grid[i][j]
+        return opt[m-1][n-1] 
+        
+```
+
+#### [Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)
+
+##### Recursive Formula
+
+$OPT[i][j] = OPT[i-1][j] * (1-obstacle[i-1][j]) + OPT[i][j-1] * (1-obstacle[i][j-1]), 0<i<m, 0<j<n$
+
+<span style="color:red">**Notice:Boundary Condition** </span>(*Consider the realistic scenario!!!*)
+
+For first row and column, possible path become 0 once an obstacle occurs in the row/column
+
+##### Python3
+
+```python
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        opt = [[0 for _ in range(n)] for _ in range(m)]
+        for i in range(m):
+            if obstacleGrid[i][0]:
+                break
+            opt[i][0] = 1
+        for j in range(n):
+            if obstacleGrid[0][j]:
+                break
+            opt[0][j] = 1
+        for i in range(1, m):
+            for j in range(1, n):
+                if obstacleGrid[i][j]:
+                    opt[i][j] = 0
+                else:
+                    opt[i][j] = opt[i-1][j] * (1-obstacleGrid[i-1][j]) + \
+                            opt[i][j-1] * (1-obstacleGrid[i][j-1])
+        return opt[m-1][n-1]
+```
+
+
+
+##### 
+
+
 

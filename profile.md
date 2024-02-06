@@ -2,86 +2,91 @@
 layout: single
 title: Profile
 permalink: /profile/
+
 ---
 
-Few information about blog owner.
+<a href="/assets/pdf/Resume_Professional.pdf" download>Download PDF Resume Here</a>
 
-## Academic Experience
-### Education
+## <u>Education</u>
 
 **COLUMBIA UNIVERSITY**, New York
 
-MS in **Biostatistics**, Public Health Data Science Track, *Sep 2023 - Current*
+MS in **Biostatistics**, Public Health Data Science Track 											
 
 **TONGJI UNIVERSITY**, Shanghai
 
-BS in **Bioinformatics**, *Sep 2019 - Jun 2023*
+BS in **Bioinformatics** 																			
 
-Minor in **Software Engineering**, *Sep 2021 - Jun 2023*
+Minor in **Software Engineering** 															     	
 
+## <u>Skills</u>
 
-### Research
-**Evaluation of Reference Datasets Oriented to Single-cell Annotations**
+- ***Programming***: **Python**, **R**, **SQL**, **Java**, C++, C#, shell, HTML/CSS/JavaScript
+- ***Data Science***: **Numpy**, **Pandas**, **Scipy**, **sklearn**, **PyTorch**, TensorFlow, **tidyverse**, ggplot2, **Shiny**, Power BI
+- ***Software Development***: **SpringBoot**, **MySQL**, SQLServer, MongoDB, **Docker**, React.js, Axios.js, Node.js, Bootstrap, Flask, JUnit
+- ***Concepts***: **Machine Learning**, **Deep Learning**, **Object-Oriented Programming**, **Data Structure**, RESTful API, **RBDMS**, NoSQL, **Agile Development**, Cloud Computing (**AWS**, Google Cloud, Azure, Alibaba Cloud)
 
-- Designed the sampling method based on the determinantal point process and oversampling algorithm, which is able to generate high-quality reference data while keeping the original data amount.
+## <u>Research</u>
 
-- Implemented the method by Python and packaged code into a library with an MIT open-source license.
+**Gradient Boosting Localization Algorithm for Disease Causal Variant Identification** 				
 
+*Columbia University Irving Medical Center*										  					   
+
+- Packed source code into an open-source **R** library while delivering correctness verification and unit testing for the algorithm blocks.
+
+- Refactored source code with **R6 Class** to enhance the succinctness and reproducibility of source code.
+- Accelerated the running time of algorithm by optimizing linear algebra calculation process and implementing core module with **C++** library like Eigen.
+
+**Evaluation of Reference Datasets Oriented to Single-cell Annotations**								
+
+*Tongji University*  																					  
+
+- Designed the sampling method based on the determinantal point process and oversampling algorithm, which can generate high-quality reference data while keeping the original data amount.
+- Implemented the method by **Python** and packaged code into a library with an MIT open-source license.
 - Evaluated the method by comparing the automatic annotation results between original and refined datasets via several models, including Seurat, SciBet, scmap, etc.
 
-**PhageMAP (Phage-Microbiome Assist Phagotherapy) for iGEM 2021**
+**PhageMAP (Phage-Microbiome Assist Phagotherapy)** 									  		
 
-- Achieved BEST Award in Software Track, iGEM 2021
+*Best Software Award in iGEM (International Genetic Engineering Machine) 2021*  								
 
-- Developed phagotherapy assisting method for analyzing bacterium-phage interactions by using algorithms including CRISPRDetect, BLAST, PHP, WIsH and statistical methods including the kernel.
+- Developed phagotherapy assisting method for analyzing bacterium-phage interactions by using algorithms including CRISPRdetect, BLAST, PHP, WIsh and statistical methods including the kernel.
+- Designed and implemented a relational database that stored information of bacterium, phage and bacterium-phage interactions via **MySQL** platform.
+- Offered a user-friendly usage of analysis procedure by deploying the software environment and packages in a **Docker** container and uploading the container to DockerHub with instructional documentation.
+- Implemented the front-end [webpages](https://2021.igem.org/Team:Tongji_Software) using **HTML/CSS/JavaScript** collaboratively.
 
-- Designed and implemented a relational database that stored information of bacterium, phage and bacterium-phage interactions via MySQL platform.
+## <u>Internship</u>
+**Shanghai Foxhub Network Technology Company**											
 
-- Offered a user-friendly usage of analysis procedure by deploying the software environment and packages in a Docker container and uploading the container to DockerHub with instructional documentation.
+*Data Engineer Intern*
 
-- Implemented the front-end webpages using HTML/CSS/JavaScript collaboratively.
+- Designed relational database architecture (ER diagrams) and unstructured data source (OSS, **Object Storage Service**) on the **Alibaba Cloud** platform to support front-end webpage access.
 
-
-## Professional Experience
-### Internship
-**R&D Department, Database Engineer**, Shanghai Foxhub Network Technology Company
-
-- Designed relational database architecture (ER diagrams) and unstructured data source (OSS, Object Storage Service) on the Alibaba Cloud platform to support front-end webpage access.
-
-- Managed database access permission and backup operation by writing scripts to ensure production and development environment stability.
-
-- Wrote working log and instructional documentation about database usage to smooth collaboration.
-
-### Course Project
-**Course Management System**
-
-- Specified requirements, system design and implementation technologies under the view of micro-service.
-
-- Implemented back-end service by MySQL, MongoDB, Docker, SpingMVC and front-end web page by React, Webpack, Axios, Node.js, etc.
-
-- Wrote development documentation for collaboration and user manual for friendly usage.
-
-**PlantDB (Plant Information Application)**
-
-- Designed and implemented relational database on SQL Server platform to store data of plants and users.
-
-- Built a desktop application on VS.NET platform to deliver data visualization and user interaction.
-
-## Skill
-### Core Courses
-- **Mathematics**: Advanced Mathematics (Calculus, Differential Equation, etc), Linear Algebra, Probability, Statistics, Discrete Math, Numerical Methods and Computer Algorithms
-- **Computer Science**: C/C++ Programming, Foundation of Data Structure, Software Engineering, Software Test, Database and Data Warehouse Technology, Introduction to Embedded Systems, SOA and Web Service
-- **Data Science**: Machine Learning Theory and Algorithms, MIT xPRO Machine Learning Course
-- **Bioinformatics**: Modern Bio-computing Environments, Computational Genomics, Bioinformatics 
+- Managed **MySQL** database access permission and backup operation by writing **shell** scripts to maintain the stability of
+  production and development environment.
 
 
-### Programming Language
-C/C++, Python, SQL, Java, R, shell, HTML5/CSS3/Javascript 
+## <u>Projects</u>
 
-### Development Suite
-PyTorch, SpringMVC, React, Docker
+**Billionaire Omics** | *R, Shiny, Bootstrap*
 
+- Conducted exhaustive exploratory data analysis (EDA) with **tidyverse** to uncover patterns and insights related to billionaires.
+- Developed a Shiny App for interactive data exploration, featuring intuitive navigation and dynamic visualizations.
+- Implemented a [website](https://sitianzhou.github.io/BillionaireOmics/index.html) with **Bootstrap** and deployed **GitHub Pages** to serve as a comprehensive platform for showcasing project findings, ensuring a responsive and engaging user experience across various devices.
 
-<hr>
-<br>
-<a href="./static/CV - Pei Tian V2023.pdf" download>Download PDF Resume Here</a>
+**Course Management System** | *SpringBoot, React.js, Bootstrap, MySQL, MongoDB, Docker, Maven, Webpack, Postman*
+
+- Led the development of microservice-based system using **SpringBoot** and **React.js** as framework including requirement specification, system design, implementation and testing, resulting in a multi-functional and user-friendly web service application.
+- Designed the database structure applying **MySQL** for relation-based data and **MongoDB** for archive-based data, while using **Docker** to maintain the isolation of different database.
+- Implemented and tested RESTful API by **SpringBoot** and **Postman** while delivering an interactive website with **React.js, Node.js, Axios.js, Bootstrap, Webpack**.
+
+**Predicting Solid Waste Composition with Neural Network** | *PyTorch, TensorFlow, sklearn*
+
+- Implemented data cleaning, preprocessing and feature engineering for raw datasets with packages like **pandas, sklearn**.
+- Predicted solid waste composition using neural network model while utilizing many machine learning technologies including L2 regularization, Adam optimizer and dropout layer via **PyTorch** library.
+- Visualized data features and model evaluation results via **matplotlib** and **Tensorflow** library.
+
+**Neurodegenerative Diseases Onset Prediction** | *Python, Flask, sklearn, MySQL*
+
+- Completed data collection, preprocessing and feature engineering on open-source patient data about the onset of Alzheimer’s disease and Parkinson’s disease.
+- Trained the prediction models in **sklearn** environment by classical machine learning algorithms including SVM, decision tree, etc.
+- Delivered a project website with **Flask** to demonstrate details and provide an interactive prediction interface.

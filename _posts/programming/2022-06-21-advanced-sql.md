@@ -92,16 +92,31 @@ header:
 ### Conditional Clause
 
 ```sql
- # IF-ELSE
+ -- IF-ELSE
  IF([cond], value1, value2)
  
- # CASE
+ -- CASE
  CASE
    WHEN [cond1] THEN ...
    WHEN [cond2] THEN
    ELSE ...
  END
 ```
+
+```sql
+-- Example
+-- Determine the income level of employees
+SELECT 
+	salary,
+	CASE 
+		WHEN income > 100000 THEN "high"
+		WHEN income BETWEEN 50000 AND 100000 THEN "medium"
+		ELSE "low"
+	END as income_level
+FROM Employee
+```
+
+
 
 ### WITH
 
@@ -119,6 +134,8 @@ header:
  ENCODE(str, pswd_str)
  DECODE(crypt_str, pswd_str)
 ```
+
+
 
 ## Window Function
 
