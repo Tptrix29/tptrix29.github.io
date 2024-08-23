@@ -7,6 +7,11 @@ Personal Blog for recording notes and materials.
 - Configure theme with [Minimal Mistakes](https://mademistakes.com/work/jekyll-themes/minimal-mistakes/)
 - Setup Structure
 
+## Build
+```shell
+bundle exec jekyll serve
+```
+
 ## TODO
 - Update notes
 - Configure Search Engine

@@ -1,11 +1,11 @@
 Pei Tian:
   name        : "Pei Tian"
-  bio         : "Master student at Columbia University"
+  bio         : "M.S. Data Science @ Columbia University '25"
   avatar      : "/assets/img/bio.jpg"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:tpzl0222@gmail.com"
+      url: "mailto:tptrix29@outlook.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://tptrix29.github.io/"

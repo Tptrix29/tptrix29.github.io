@@ -18,10 +18,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Tptrix29's Blog
-subtitle: "Blog about data science and programming."
+title: Tptrix29's Personal Website
+subtitle: "Blogs about data science and programming."
 repository: Tptrix29/tptrix29.github.io
-logo: /assets/img/logo.png
+logo: /assets/img/bio.png
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 

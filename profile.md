@@ -9,9 +9,9 @@ permalink: /profile/
 
 ## <u>Education</u>
 
-**COLUMBIA UNIVERSITY**, New York
+**COLUMBIA UNIVERSITY**, New York City
 
-MS in **Biostatistics**, Public Health Data Science Track 											
+M.S. in **Data Science**, Fu Foundation School of Engineering and Applied Science 		
 
 **TONGJI UNIVERSITY**, Shanghai
 
@@ -24,7 +24,7 @@ Minor in **Software Engineering**
 - ***Programming***: **Python**, **R**, **SQL**, **Java**, C++, C#, shell, HTML/CSS/JavaScript
 - ***Data Science***: **Numpy**, **Pandas**, **Scipy**, **sklearn**, **PyTorch**, TensorFlow, **tidyverse**, ggplot2, **Shiny**, Power BI
 - ***Software Development***: **SpringBoot**, **MySQL**, SQLServer, MongoDB, **Docker**, React.js, Axios.js, Node.js, Bootstrap, Flask, JUnit
-- ***Concepts***: **Machine Learning**, **Deep Learning**, **Object-Oriented Programming**, **Data Structure**, RESTful API, **RBDMS**, NoSQL, **Agile Development**, Cloud Computing (**AWS**, Google Cloud, Azure, Alibaba Cloud)
+- ***Concepts***: **Machine Learning**, **Deep Learning**, **Natural Language Processing**, **Computer Vision**, **Object-Oriented Programming**, **Data Structure**, RESTful API, **RDBMS**, NoSQL, **Agile Development**, Cloud Computing (**AWS**, Google Cloud, Azure, Alibaba Cloud)
 
 ## <u>Research</u>
 
