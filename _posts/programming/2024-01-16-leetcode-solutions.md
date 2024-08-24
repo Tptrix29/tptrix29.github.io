@@ -4,7 +4,7 @@ layout: single
 date:   2024-01-16 -0500
 author: Pei Tian
 categories: programming
-tags: leetcode python programming
+tags: leetcode
 header:
     teaser: /assets/img/training-guidence.png
 ---
@@ -1382,6 +1382,27 @@ class Solution:
         
 ```
 
+#### [Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)
+
+##### Strategy
+
+Order not matter!
+
+##### Python3
+
+```python
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+        # greedy 
+        ans, prev = 0, -inf
+        pairs.sort(key = lambda x: x[1])
+        for l, r in pairs:
+            if l > prev:
+                ans += 1
+                prev = r
+        return ans
+```
+
 
 
 ## Dynamic Programming
@@ -1511,16 +1532,18 @@ class Solution:
 
 ##### Recursive Formula
 
-Denote $V$ as sorted values in $nums$, $n = |V|$
+Denote $V$ as sorted values in $nums$, $n = |V|$, $OPT[i]$ denotes the max score for the subset with $V[i-1]$ as maximum
 $$
 OPT[i] = \max \cases{
 	\displaystyle \cases{
-		OPT[i-2]+ V[i-1] * \# V[i-1], \text{if $V[i-1] = V[i+2]+1$}\\
-		OPT[i-1]+ V[i-1] * \# V[i-1], \text{if $V[i-1] \neq V[i+2]+1$}
-	}, \text{delete $V[i]$}\\
-	\displaystyle OPT[i-1], \text{Not delete $V[i]$}
-}, 0\le i \le n
+		OPT[i-2]+ V[i-1] * \# V[i-1], \text{if $V[i-1] = V[i-2]+1$}\\
+		OPT[i-1]+ V[i-1] * \# V[i-1], \text{if $V[i-1] \neq V[i-2]+1$}
+	}, \text{delete $V[i-1]$}\\
+	\displaystyle OPT[i-1], \text{Not delete $V[i-1]$}
+}, 0< i \le n
 $$
+
+$OPT[0] = 0$
 
 ##### Python3
 
@@ -1533,7 +1556,7 @@ class Solution:
         for i in range(1, len(vals)+1):
             score = vals[i-1] * counter[vals[i-1]]
             if vals[i-1] != vals[i-2]+1:
-                opt[i] = max(opt[i-1], opt[i-2]) + score
+                opt[i] = opt[i-1] + score
             else:
                 opt[i] = max(opt[i-1], opt[i-2] + score)
         return opt[-1]
@@ -1632,7 +1655,442 @@ class Solution:
 
 
 
-##### 
+#### [Triangle](https://leetcode.com/problems/triangle/)
+
+##### Recursive Formula
+
+$OPT[i][j]$ denotes mininal sum at $j$-th location of $i$​-th layer
+
+$OPT[i][j] = \min \{OPT[i-1][\min(i-1, j)], OPT[i-1][max(0, j-1)]\} + V[i][j], 0<i<n, 0\le j\le i$
+
+$OPT[0][0] = V[0][0]$
+
+##### Python3
+
+```python
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        prev = triangle[0]
+        n = len(triangle)
+        if n == 1:
+            return triangle[0][0]
+        for i in range(1, n):
+            count = len(triangle[i])
+            cur = [0] * count
+            for j in range(count):
+                cur[j] = min(prev[max(0, j-1)], prev[min(i-1, j)]) + \
+                           triangle[i][j]
+            prev = cur
+        return min(cur)
+```
 
 
+
+#### [Minimum Falling Path Sum](https://leetcode.com/problems/minimum-falling-path-sum/)
+
+##### Recursive Formula
+
+$OPT[i][j] = \min\{OPT[i-1][j-1], OPT[i-1][j], OPT[i][j-1]\} + M[i][j], 0\le i, j < n$​
+
+$OPT[-1][j] = OPT[i][-1] = OPT[n][j] = OPT[i][n] = \infty$
+
+##### Python3
+
+```python
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        n = len(matrix)
+        if n == 1:
+            return matrix[0][0]
+        prev = matrix[0]
+        max_int = 2 ** 31 - 1
+        for i in range(1, n):
+            cur = [0] * n
+            for j in range(n):
+                val1 = prev[j-1] if j > 0 else max_int
+                val2 = prev[j]
+                val3 = prev[j+1] if j < n-1 else max_int
+                cur[j] = min(val1, val2, val3) + matrix[i][j]
+            prev = cur
+        return min(cur)
+      
+```
+
+
+
+#### [Maximal Square](https://leetcode.com/problems/maximal-square/)
+
+##### Recursive Formula
+
+$$
+OPT[i][j] = \cases{
+	0, M[0][0] == 0\\
+	\cases{
+		\min\{OPT[i-1][j], OPT[i][j-1]\} + 1, OPT[i-1][j] == OPT[i][j-1] \\
+		OPT[i-1][j] + I(OPT[i-1][j-1] \ge OPT[i-1][j])
+	}, M[0][0] == 1
+} 0 < i < m, 0 < j < n
+$$
+
+$OPT[i][0] = M[i][0], 0 < i < m$​
+
+$OPT[0][j] = M[0][j], 0 < j < n$
+
+##### Python3
+
+```python
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+        opt = [[int(matrix[i][j]) for j in range(n)] for i in range(m)]
+        result = int(max(matrix[0]))
+        for i in range(1, m):
+            result = max(int(matrix[i][0]), result)
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][j] == "1":
+                    val1, val2 = opt[i-1][j], opt[i][j-1]
+                    if val1 == val2:
+                        opt[i][j] = val1 + 1 if opt[i-1][j-1] >= val1 else val1
+                    else:
+                        opt[i][j] = min(val1, val2) + 1
+                    result = max(result, opt[i][j])
+        return result ** 2
+```
+
+
+
+#### [Word Break](https://leetcode.com/problems/word-break/)
+
+##### Recursive Formula
+
+$DP[i]$ denotes whether $s[:i+1]$ could be break into words in dictionary
+
+- $\exists j < i, DP[j] == true \text{ and } s[j+1:i+1] \in dict \Rightarrow  DP[i] = true$​ 
+- $s[:i+1] \in dict \Rightarrow DP[i] = true$​
+
+##### Python3
+
+```python
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        dp = [False] * n
+        dp[0] = True if s[0] in wordDict else False
+        for i in range(1, n):
+            j = i-1
+            while j >= 0:
+                if dp[j]:
+                    if s[j + 1:i + 1] in wordDict:
+                        dp[i] = True
+                        break
+                j -= 1
+            dp[i] = s[:i+1] in wordDict or dp[i]
+        return dp[-1]
+```
+
+
+
+#### [Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/)
+
+##### Recursive Formula
+
+$DP[i][j]$ denotes the length of longest palindromic subsequence in $s[i:j+1]$
+$$
+DP[i][j] = \cases{
+	1, i == j\\
+	DP[i+1][j] + 2, \text{if } s[i] == s[j]\\
+	\max\{DP[i+1][j], DP[i][j-1]\}, \text{otherwise}
+}, 0 \le i \le j < n
+$$
+
+##### Python3
+
+```python
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n = len(s)
+        dp = [[0 for _ in range(n)] for _ in range(n)]
+        for i in range(n-1, -1, -1):
+            dp[i][i] = 1
+            for j in range(i+1, n):
+                if s[i] == s[j]:
+                    dp[i][j] = dp[i+1][j-1] + 2
+                else:
+                    dp[i][j] = max(dp[i+1][j], dp[i][j-1])
+        return dp[0][-1]
+```
+
+
+
+#### [Edit Distance](https://leetcode.com/problems/edit-distance/)
+
+##### Recursive Formula
+
+$DP[i][j]$ denotes the min edit distance of $word_1[:i+1]$ and $word_2[:j+1]$​​
+
+$\text{For } 0<i<|word_1|, 0<j<|word_2|$ $
+$$
+DP[i][j] = \cases{
+	DP[i-1][j-1], \text{if } word_1[i] == word_2[j]\\
+	\min\{DP[i-1][j-1], DP[i][j-1], DP[i-1][j]\} + 1, \text{if } word_1[i] \neq word_2[j]
+} \\
+DP[i][0] = \cases{
+	i+1 \text{ if } word_2[0] \notin word_1[:i+1] \\
+	i, \text{otherwise}
+}\\
+DP[0][j] = \cases{
+	j+1 \text{ if } word_1[0] \notin word_2[:j+1] \\
+	j, \text{otherwise}
+}
+$$
+
+
+##### Python3
+
+```python
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        len1, len2 = len(word1), len(word2)
+        # boundary case
+        if not len1 or not len2:
+            return max(len1, len2)
+        dp = [[0 for _ in range(len2)] for _ in range(len1)]
+        dp[0][0] = 0 if word1[0] == word2[0] else 1
+        # initialize first column
+        flag = 1 if word1[0] == word2[0] else 0
+        for i in range(1, len1):
+            if word1[i] == word2[0]:
+                flag = 1
+            dp[i][0] = i + 1 - flag
+        # initialize first row
+        flag = 1 if word1[0] == word2[0] else 0
+        for j in range(1, len2):
+            if word1[0] == word2[j]:
+                flag = 1
+            dp[0][j] = j + 1 - flag
+        # dynamic programming
+        for i in range(1, len1):
+            for j in range(1, len2):
+                if word1[i] == word2[j]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]) + 1
+        return dp[-1][-1]
+```
+
+
+
+#### [Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/)
+
+##### Recursive Formula
+
+$OPT[i][j] = \cases{\min\{OPT[i-1][j] + ascii(s_1[i-1]), OPT[i][j-1] + ascii(s_2[j-1])\}, \text{if } s_1[i-1] \neq s_2[j-1] \\ OPT[i-1][j-1], \text{if } s_1[i-1] == s_2[j-1]}, 1\le i \le |s_1|, 1\le j \le |s_2|$
+
+$OPT[i][0] = OPT[i-1][0] + ascii(s_1[i-1]), 1\le i\le |s_1|$​
+
+$OPT[0][j] = OPT[0][j-1] + ascii(s_2[j-1]), 1\le j\le |s_2|$
+
+##### Python3
+
+```python
+class Solution:
+    def minimumDeleteSum(self, s1: str, s2: str) -> int:
+        l1, l2 = len(s1), len(s2)
+        dp = [[0 for _ in range(l2+1)] for _ in range(l1+1)]
+        for i in range(1, l1+1):
+            dp[i][0] = dp[i-1][0] + ord(s1[i-1])
+        for j in range(1, l2+1):
+            dp[0][j] = dp[0][j-1] + ord(s2[j-1])
+        for i in range(1, l1+1):
+            for j in range(1, l2+1):
+                if s1[i-1] == s2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i-1][j] + ord(s1[i-1]), dp[i][j-1] + ord(s2[j-1]))
+        return dp[l1][l2]
+```
+
+
+
+#### [Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)
+
+##### Recursive Formula
+
+$OPT[i][j]$ denotes the count of subsequences in $s[:j+1]$ matching $t[:i+1]$​
+
+When one letter matches, you could choose either including it in subsequence or not.
+
+$OPT[i][j] = \cases{OPT[i][j-1] + OPT[i-1][j-1], \text{if } s[i-1] == t[j-1]\\ OPT[i][j-1], \text{otherwise}}, 1\le i\le |t|, 1 \le j \le |s|$​
+
+$OPT[i][0] = 0, OPT[0][j] = 1, 1\le i\le |t|, 0 \le j \le |s|$
+
+##### Python3
+
+```python
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        l1, l2 = len(t), len(s)
+        dp = [[0 for _ in range(l2+1)] for _ in range(l1+1)]
+        for j in range(1, l2+1):
+            dp[0][j] = 1
+        dp[0][0] = 1
+        for i in range(1, l1+1):
+            for j in range(1, l2+1):
+                if t[i-1] == s[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
+                else:
+                    dp[i][j] = dp[i][j-1]
+        return dp[l1][l2]
+```
+
+
+
+#### [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+
+##### Recursive Formula
+
+$OPT[i]$ demostrates the LIS ending at $i$-th index
+$$
+OPT[i] = \max_{0 \le j < i}\cases{
+	OPT[j]+1, \text{if }nums[i] > nums[j] \\
+	1,  \text{otherwise }
+	}, 0 < i < n
+$$
+Boundary: $OPT[0] = 1$​
+
+Output: $\max\{OPT[i]\}, 0 \le i < n$
+
+##### Python3
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = [1] * n
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[j] + 1, dp[i])
+        return max(dp)
+        
+```
+
+
+
+#### [Number Of Longest Increasing Subsequences](https://leetcode.com/problems/number-of-longest-increasing-subsequence/)
+
+##### Recursive Formula
+
+$DP_1$ demonstrates the LIS ending at $i$-th index
+
+$DP_2$ demonstrates the count of LIS ending at $i$-th index
+$$
+DP_2[i] = \max_{0 \le j < i}\cases{
+	\cases{
+		DP_2[i] + DP_2[j], \text{if } DP_1[j] + 1 = DP_1[i]\\
+    DP_2[j], \text{if } DP_1[j] + 1 > DP_1[i]
+	}, \text{if }nums[i] > nums[j] \\
+	1,  \text{otherwise }
+	}, 0 < i < n
+$$
+Boundary: $DP_2[0] = 1$
+
+Output: $\displaystyle \sum^{n-1}_{i=0} DP_2[i]*I(DP_1[i] == \max DP_1)$
+
+##### Python3
+
+```python
+class Solution:
+    def findNumberOfLIS(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp1 = [1] * n
+        dp2 = [1] * n
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    # find prev seq
+                    if dp1[i] == dp1[j] + 1:
+                        dp2[i] += dp2[j]
+                    # update LIS
+                    elif dp1[i] < dp1[j] + 1:
+                        dp2[i] = dp2[j]
+                        dp1[i] = dp1[j] + 1
+        M = max(dp1)
+        result = 0
+        for i in range(n):
+            if dp1[i] == M: 
+                result += dp2[i]
+        return result
+```
+
+
+
+
+
+#### [Longest Arithmetic Subsequence of Given Difference](https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/)
+
+##### Recursive Formula
+
+Use hash table to store dp table, $DP[v]$ denotes the max length of arithmetic subsequence ends at $v$
+
+$DP[v] = DP[v-d] + 1, v \in A$
+
+$DP[v] = 0 \text{ if } v \notin A$
+
+##### Python3
+
+```python
+class Solution:
+    def longestSubsequence(self, arr: List[int], difference: int) -> int:
+        dp = defaultdict(int)
+        for v in arr:
+            dp[v] = dp[v-difference] + 1
+        return max(dp.values())
+```
+
+
+
+#### 
+
+##### Recursive Formula
+
+
+
+##### Python3
+
+```python
+
+```
+
+
+
+#### [Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)
+
+##### Recursive Formula
+
+$count[i, k]$ denotes $\#(BST)$ forming with values from 1 to $k$ with $i$​ as root 
+
+$DP[k]$ denotes  $\#(BST)$ forming with values from 1 to $k$, $DP[k] = \displaystyle \sum_{i=1}^k count[i, k]$
+
+$count[i, k] = DP[i-1] * DP[k-i]$​
+
+$DP[k] = \displaystyle \sum_{i=1}^k DP[i-1] * DP[k-i], 0 < i \le k, 2 \le k \le n$
+
+Boundary: $DP[0] = DP[1] = 1$
+
+Output: $DP[n]$
+
+##### Python3
+
+```python
+class Solution:
+    def numTrees(self, n: int) -> int:
+        dp = [0] * (n+1)
+        dp[0] = dp[1] = 1
+        for k in range(2, n+1):
+            for i in range(1, k+1):
+                dp[k] += dp[i-1] * dp[k-i]
+        return dp[n]
+```
 

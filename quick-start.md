@@ -2,7 +2,7 @@
 title: Quick Start
 permalink: /start/
 ---
-Find Something Interesting!
+Explore data science with me!
 
 ## Browse 
 - [By Categories](../categories/index.html)

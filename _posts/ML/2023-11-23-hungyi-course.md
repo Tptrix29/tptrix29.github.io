@@ -3,7 +3,7 @@ title:  "Hungyi Lee Machine Learning Course"
 date:   2023-11-23 -0500
 author: Pei Tian
 categories: machine-learning
-tags: ML DL
+tags: ML/DL
 author: Pei Tian
 header:
     teaser: /assets/img/training-guidence.png

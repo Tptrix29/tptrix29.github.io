@@ -19,9 +19,9 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Tptrix29's Personal Website
-subtitle: "Blogs about data science and programming."
+subtitle: "Blogs about data science and programming"
 repository: Tptrix29/tptrix29.github.io
-logo: /assets/img/bio.png
+logo: /assets/img/columbia-seas.jpg
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -180,16 +180,16 @@ defaults:
 author:
   name             : "Pei Tian"
   avatar           : /assets/img/bio.jpeg
-  bio              : "Master Student at *Columbia University*."
+  bio              : "M.S. Data Science @ *Columbia University* '25"
   location         : "New York City, NY, USA"
   # email            : "pei.tian@columbia.edu"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:pei.tian@columbia.edu"
+      url: "mailto:pt2632@columbia.edu"
     - label: "Tptrix29"
       icon: "fas fa-fw fa-link"
-      url: "https://tptrix29.github.io/"
+      url: "https://tptrix29.github.io/profile"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"

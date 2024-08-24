@@ -5,7 +5,9 @@ permalink: /profile/
 
 ---
 
-<a href="/assets/pdf/Resume_Professional.pdf" download>Download PDF Resume Here</a>
+<span style="font-size: 16px">
+  <a href="/assets/pdf/Resume_PT.pdf">PDF Version</a> | <a href="/assets/pdf/Resume_PT.pdf" download>Download</a>
+</span>
 
 ## <u>Education</u>
 
@@ -15,9 +17,7 @@ M.S. in **Data Science**, Fu Foundation School of Engineering and Applied Scienc
 
 **TONGJI UNIVERSITY**, Shanghai
 
-BS in **Bioinformatics** 																			
-
-Minor in **Software Engineering** 															     	
+BS in **Bioinformatics**, Minor in **Software Engineering** 															     	
 
 ## <u>Skills</u>
 
@@ -27,6 +27,16 @@ Minor in **Software Engineering**
 - ***Concepts***: **Machine Learning**, **Deep Learning**, **Natural Language Processing**, **Computer Vision**, **Object-Oriented Programming**, **Data Structure**, RESTful API, **RDBMS**, NoSQL, **Agile Development**, Cloud Computing (**AWS**, Google Cloud, Azure, Alibaba Cloud)
 
 ## <u>Research</u>
+**Transformer-based Peptide Language Model**
+
+*AIQuraishi Laboratory, Columbia University*
+
+- Collected and tidied 600k+ peptide datasets and 35 protein property datasets, ensuring high-quality data for model training and benchmark
+
+- Trained transformer-based language models with PyTorch Lightning on Slurm-supported HPC to generate peptide/protein representation
+
+- Conducted benchmark with various methods like Neural Network, Query Attention and Contrastive Learning on tasks such as motif detection
+
 
 **Gradient Boosting Localization Algorithm for Disease Causal Variant Identification** 				
 
@@ -55,6 +65,16 @@ Minor in **Software Engineering**
 - Implemented the front-end [webpages](https://2021.igem.org/Team:Tongji_Software) using **HTML/CSS/JavaScript** collaboratively.
 
 ## <u>Internship</u>
+**Radical AI Inc**
+
+*AI Engineer Intern*
+
+- Engineered a chat-based learning assistant using the Google Gemini model, featuring automated quiz generation and customized instruction
+
+- Developed a robust FastAPI backend to process diverse file formats (YouTube videos, Microsoft documents, etc.) with LangChain and ChromaDB
+
+- Ensured high performance through meticulous unit testing with pytest and comprehensive integration testing within Docker environments
+
 **Shanghai Foxhub Network Technology Company**											
 
 *Data Engineer Intern*
@@ -66,6 +86,14 @@ Minor in **Software Engineering**
 
 
 ## <u>Projects</u>
+
+**Custom LLM Chatbots with Character-Specific Tone** | *LLM, LoRA, NLP*
+
+- Automated the collection of chat datasets from public wiki websites using a web scraper built with BeautifulSoup and Selenium in Python
+
+- Fine-tuned state-of-the-art LLM like LLaMA using LoRA technique on the HuggingFace platform with customized dataset to acquire specific tone
+
+- Developed RESTful API with FastAPI as backend and a multi-page app with Streamlit as frontend for interactive usage of cutomized models
 
 **Billionaire Omics** | *R, Shiny, Bootstrap*
 

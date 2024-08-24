@@ -1,8 +1,10 @@
 main:
   - title: "Quick Start"
     url: /start/
+  - title: "Posts"
+    url: /tags
   - title: "Profile"
     url: /profile/
-  - title: "About"
+  - title: "About Me"
     url: /about/
   
