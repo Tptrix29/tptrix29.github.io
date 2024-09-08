@@ -18,12 +18,43 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Tptrix29's Personal Website
-subtitle: "Blogs about data science and programming"
+title: Pei Tian's Personal Website
+subtitle: "Data Science & Programming"
 repository: Tptrix29/tptrix29.github.io
 logo: /assets/img/columbia-seas.jpg
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Site Author
+author:
+  name             : "Pei Tian"
+  avatar           : /assets/img/bio.jpeg
+  bio              : "M.S. in Data Science @ *Columbia University* '25"
+  location         : "New York City, NY, USA"
+  # email            : "pei.tian@columbia.edu"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:pt2632@columbia.edu"
+    - label: "Tptrix29"
+      icon: "fas fa-fw fa-link"
+      url: "https://tptrix29.github.io/profile"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      # url: "https://twitter.com/"
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      # url: "https://facebook.com/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/Tptrix29"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      # url: "https://instagram.com/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/pei-tian-41177028a/"
+
 
 # Build settings
 # theme: minima
@@ -85,7 +116,7 @@ kramdown:
   auto_ids: true
   footnote_nr: 1
   entity_output: as_char
-  toc_levels: 1..6
+  # toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
@@ -139,8 +170,10 @@ defaults:
       comments: true
       share: true
       related: true
+      show_date: true
       toc: true
       toc_sticky: true
+      toc_label: "Contents"
   # _pages
   - scope:
       path: ""
@@ -149,6 +182,7 @@ defaults:
       layout: single
       author_profile: true
       show_date: true
+      comments: false
   - scope:
       path: ""
       type: home
@@ -166,45 +200,13 @@ defaults:
       path: ""
       type: tag
     values:
-      author_profile: true
+      comments: false
   - scope:
       path: ""
       type: category
     values:
       comments: false
 
-  
-
-
-# Site Author
-author:
-  name             : "Pei Tian"
-  avatar           : /assets/img/bio.jpeg
-  bio              : "M.S. Data Science @ *Columbia University* '25"
-  location         : "New York City, NY, USA"
-  # email            : "pei.tian@columbia.edu"
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:pt2632@columbia.edu"
-    - label: "Tptrix29"
-      icon: "fas fa-fw fa-link"
-      url: "https://tptrix29.github.io/profile"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/Tptrix29"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/pei-tian-41177028a/"
 
 # Site Footer
 footer:

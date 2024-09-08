@@ -1,7 +1,6 @@
 ---
 title:  "R Package Development"
 date:   2023-11-25 -0500
-author: Pei Tian
 categories: programming
 tags: R
 header:

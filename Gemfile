@@ -41,12 +41,11 @@ group :jekyll_plugins do
   gem "jekyll-seo-tag"
   gem "jekyll-sitemap"
   gem "jekyll-paginate"
-  gem "jekyll-include-cache"
+  # gem "jekyll-include-cache"
+  gem "jekyll-include-cache", group: :jekyll_plugins
   gem "jekyll-algolia"
   gem "jekyll-archives"
 end
-
-gem "jekyll-include-cache", group: :jekyll_plugins
 
 # Local 
 # gem "minimal-mistakes-jekyll"

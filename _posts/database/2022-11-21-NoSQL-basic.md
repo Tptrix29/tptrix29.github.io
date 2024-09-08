@@ -1,7 +1,6 @@
 ---
 title:  "NoSQL Basic"
 date:   2022-06-21 -0500
-author: Pei Tian
 categories: database
 tags: NoSQL
 header:

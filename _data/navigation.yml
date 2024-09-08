@@ -2,7 +2,7 @@ main:
   - title: "Quick Start"
     url: /start/
   - title: "Posts"
-    url: /tags
+    url: /tags/
   - title: "Profile"
     url: /profile/
   - title: "About Me"

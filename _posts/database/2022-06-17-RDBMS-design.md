@@ -1,7 +1,6 @@
 ---
 title:  "RDBMS Design"
 date:   2022-06-17 -0500
-author: Pei Tian
 categories: database 
 tags: RDBMS
 header:

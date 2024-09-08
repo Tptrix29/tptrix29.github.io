@@ -1,7 +1,6 @@
 ---
 title:  "AWS Certificate Notes"
 date:   2024-01-27 -0500
-author: Pei Tian
 categories: cloud 
 tags: AWS
 header:

@@ -2,7 +2,9 @@
 layout: single
 title: Profile
 permalink: /profile/
-
+toc: true
+toc_sticky: true
+toc_label: Profile
 ---
 
 <span style="font-size: 16px">

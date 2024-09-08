@@ -1,7 +1,6 @@
 ---
 title:  "Advanced SQL"
 date:   2022-06-21 -0500
-author: Pei Tian
 categories: programming
 tags: SQL 
 header:
