@@ -59,7 +59,7 @@ author:
 # Build settings
 # theme: minima
 # theme: minimal-mistakes-jekyll
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+remote_theme: "mmistakes/minimal-mistakes@master"
 minimal_mistakes_skin: "default"
 plugins:
   - jekyll-paginate
@@ -116,12 +116,15 @@ kramdown:
   auto_ids: true
   footnote_nr: 1
   entity_output: as_char
-  # toc_levels: 1..6
+  toc_levels: 1..4
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
 collections:
   portfolio:
+    output: true
+    permalink: /:collection/:path/
+  docs:
     output: true
     permalink: /:collection/:path/
 
@@ -158,6 +161,9 @@ lunr:
 # Enable breadcrumbs in page headers (default: false)
 breadcrumbs: true  
 
+# Enable code copy button in code blocks (default: false)
+enable_copy_code_button  : true
+
 defaults:
   # _posts
   - scope:
@@ -174,6 +180,17 @@ defaults:
       toc: true
       toc_sticky: true
       toc_label: "Contents"
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      toc_sticky: true
   # _pages
   - scope:
       path: ""
@@ -232,3 +249,49 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: https://www.linkedin.com/in/pei-tian-41177028a/
+
+# Reading Files
+include:
+  - .htaccess
+  - _pages
+exclude:
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - vendor
+  - .asset-cache
+  - .bundle
+  - .jekyll-assets-cache
+  - .sass-cache
+  - assets/js/plugins
+  - assets/js/_main.js
+  - assets/js/vendor
+  - Capfile
+  - CHANGELOG
+  - config
+  - Gemfile
+  - Gruntfile.js
+  - gulpfile.js
+  - LICENSE
+  - log
+  - node_modules
+  - package.json
+  - Rakefile
+  - README
+  - tmp
+keep_files:
+  - .git
+  - .svn
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# HTML Compression
+# - http://jch.penibelst.de/
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
+
+# Sass
+sass:
+  sass_dir: _sass
+  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style

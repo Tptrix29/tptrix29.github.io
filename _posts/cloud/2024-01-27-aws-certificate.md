@@ -3,6 +3,8 @@ title:  "AWS Certificate Notes"
 date:   2024-01-27 -0500
 categories: cloud 
 tags: AWS
+toc: true
+# classes: wide
 header:
     teaser: /assets/img/training-guidence.png
 ---
@@ -177,7 +179,7 @@ Example 1:
 
 Example 2:
 
-```JSON
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -391,6 +393,8 @@ Components:
 
 Charge for invoke times and running time
 
+
+
 ## Networking 
 
 IP address
@@ -407,7 +411,7 @@ largest range: /16
 
 
 
-#### Virtual Private Cloud, VPC
+### Virtual Private Cloud, VPC
 
 Factors:
 
@@ -467,6 +471,8 @@ VPC security:
 
   Default: Block inbound and allow outbound
 
+
+
 ## Storage
 
 Categories:
@@ -495,7 +501,7 @@ Categories:
 
 
 
-#### Elastic File System, EFS
+### Elastic File System, EFS
 
 A set-and-forget file system that automatically grows and shrinks as you add and remove files
 
@@ -503,7 +509,7 @@ Standard: multi-AZ
 
 
 
-#### FSx
+### FSx
 
 - NetApp ONTAP: drop-in replacement for existing ONTAP deployments
 - OpenZFS: move data residing in on-premises ZFS or other Linux-based file servers to AWS
@@ -512,7 +518,7 @@ Standard: multi-AZ
 
 
 
-#### Elastic Block Store, EBS
+### Elastic Block Store, EBS
 
 Located on disks which are physically attached to the host computer
 
@@ -559,9 +565,9 @@ Snapshot: incremental backups that only save the blocks on the volume that have 
 
 
 
-#### Simple Storage Service, S3
+### Simple Storage Service, S3
 
-##### Basics
+#### Basics
 
 object storage service, need to create bucket to store objects
 
@@ -595,13 +601,13 @@ Usecase:
 - Static websites
 - static content 
 
-##### Security
+#### Security
 
 - IAM policies
 - S3 bucket policies
 - encryption
 
-##### Class
+#### Class
 
 |                 **Storage Class**                  |                       **Description**                        |
 | :------------------------------------------------: | :----------------------------------------------------------: |
@@ -614,7 +620,7 @@ Usecase:
 |            **S3 Glacier Deep Archive**             | S3 Glacier Deep Archive is the lowest-cost Amazon S3 storage class. It supports long-term retention and digital preservation for data that might be accessed once or twice a year. Data stored in the S3 Glacier Deep Archive storage class has a default retrieval time of 12 hours. It is designed for customers that retain data sets for 7–10 years or longer, to meet regulatory compliance requirements. Examples include those in highly regulated industries, such as the financial services, healthcare, and public sectors. |
 |                 **S3 on Outposts**                 | Amazon S3 on Outposts delivers object storage to your on-premises AWS Outposts environment using S3 API's and features. For workloads that require satisfying local data residency requirements or need to keep data close to on premises applications for performance reasons, the S3 Outposts storage class is the ideal option. |
 
-##### Versioning
+#### Versioning
 
 version ID for object
 
@@ -628,7 +634,7 @@ States:
 
 
 
-##### Lifecycle
+#### Lifecycle
 
 - **Transition actions** define when objects should transition to another storage class.
 - **Expiration actions** define when objects expire and should be permanently deleted.
@@ -652,7 +658,7 @@ Service:
 
 
 
-#### RDS
+### RDS
 
 - Commercial: Oracle, SQL Server
 - Open-source: MySQL, PostgreSQL, MariaDB
@@ -707,9 +713,9 @@ Security:
 
 
 
-#### Purpose-built Database
+### Purpose-built Database
 
-##### DynamoDB
+**DynamoDB**
 
 NoSQL
 
@@ -729,33 +735,45 @@ High-scale application and serverless application
 
 
 
-##### ElasticCache
+**ElasticCache**
 
 In-memory caching solution
 
 support for Redis, Memcached
 
-##### MemoryDB for Redis
+
+
+**MemoryDB for Redis**
 
 In-memory, Ultra-fast
 
-##### DocumentDB (MongoDB campatibility)
+
+
+**DocumentDB (MongoDB campatibility)**
 
 store and query rich documents
 
-##### Keyspaces for Apache Cassandra
+
+
+**Keyspaces for Apache Cassandra**
 
 high-volume applications with straightforward access patterns
 
-##### Neptune
+
+
+**Neptune**
 
  highly connected data with a rich variety of relationships
 
-##### Timestream
+
+
+**Timestream**
 
 time series database service
 
-##### Quantum Ledger Database (Amazon QLDB)
+
+
+**Quantum Ledger Database (Amazon QLDB)**
 
 purpose-built ledger database that provides a complete and cryptographically verifiable history of all changes made to your application data.
 
@@ -841,7 +859,7 @@ State of alarm: OK/ALARM/INSUFFICIENT DATA(just start)
 
 
 
-#### Availability Solution
+### Availability Solution
 
 **Redundancy** is important for availability
 

@@ -2,13 +2,12 @@
 title:  "Dynamic Programming Solution"
 date:   2024-02-11 -0500
 categories: programming
-tags: leetcode
 classes: wide
+tags: leetcode
 header:
     teaser: 
 ---
 
-## Dynamic Programming
 
 ### Basic Study Plan
 

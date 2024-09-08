@@ -3,13 +3,11 @@ title:  "Leetcode Solution"
 date:   2024-01-16 -0500
 categories: programming
 tags: leetcode
-author_profile: true
-classes: wide
 header:
     teaser: /assets/img/training-guidence.png
 ---
 
-## Problem List Notes
+### Problem List Notes
 Longest substring without repeated character: use 2 pointers to maintain set of char composition and update satisfying substring
 
 Palindrome string: search from center / Not stack
@@ -29,7 +27,7 @@ Next Permutation: find location from the right side
 Reverse ListNode: dummy head, prev node
 
 
-## Solutions
+### Solutions
 
 #### [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
 

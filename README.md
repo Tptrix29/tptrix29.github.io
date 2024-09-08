@@ -9,6 +9,7 @@ Personal Blog for recording notes and materials.
 
 ## Build
 ```shell
+bundle install
 bundle exec jekyll serve
 ```
 

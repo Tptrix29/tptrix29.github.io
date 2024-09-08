@@ -6,9 +6,7 @@ tags: SQL
 header:
     teaser: /assets/img/training-guidence.png
 ---
-
-## Advanced SQL Syntax
-
+Advanced SQL Syntax
 ### Mathematic Functions
 
 ```sql
@@ -194,7 +192,7 @@ FROM Employee
 
 ## Regexp
 
-```SQL
+```sql
 SELECT * FROM [table] WHERE [VAR] REGEXP '^\d-';
 ```
 
