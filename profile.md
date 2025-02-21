@@ -78,10 +78,10 @@ classes: wide
         </div>
         <div class="container">
             <div class="emph">M.S. in Data Science</div> 
-            <div class="timeline">Sep 2023 – May 2025 (Expected)</div>
+            <div class="timeline">Sep 2023 – Dec 2025 (Expected)</div>
         </div>
         <div class="bullets">
-        <strong>Core Courses</strong>: Machine Learning for Data Science, Natural Language Processing, Algorithms for Data Science, Applied Machine Learning, Data Science, Computer Systems for Data Science, Probability, Statistical Inference
+        <strong>Core Courses</strong>: Machine Learning, Natural Language Processing, Algorithms for Data Science, Reinforcement Learning, Unsupervised Learning, High Performance Machine Learning, Data Science, Computer Systems for Data Science, Probability, Statistical Inference, Modern Analysis
         </div>
         <hr>
         <!-- BS + Minor -->
@@ -109,6 +109,35 @@ classes: wide
     <!-- Experience -->
     <section class="experience section">
         <div class="section-title">Experiences</div>
+        <!-- DSI Scholar -->
+        <div class="container">
+            <div class="subtitle">Data Science Institute, Columbia University</div>
+            <div class="locale">New York City, NY</div>
+        </div>
+        <div class="container">
+            <div class="emph">Research Scholar</div> 
+            <div class="timeline">Jan 2025 – Present</div>
+        </div>
+        <ul class="bullets">
+            <li>Processed a realistic phytoplankton image dataset while utilizing OpenCV for segmentation to obtain 1 million cell items across 200+ stations</li>
+            <li>Applied unsupervised clustering algorithms including K-Means, Spectral Clustering, and DBSCAN to classify diverse phytoplankton species cluster based on both physical attributes and ResNet50-generated image embeddings</li>
+        </ul>
+        <hr>
+        <!-- DitecT Lab -->
+        <div class="container">
+            <div class="subtitle">DitecT Laboratory, Columbia University</div>
+            <div class="locale">New York City, NY</div>
+        </div>
+        <div class="container">
+            <div class="emph">Graduate Researcher</div> 
+            <div class="timeline">Sep 2024 – Dec 2024</div>
+        </div>
+        <ul class="bullets">
+            <li>Fine-tuned a diffusion-based video generation model with 1.5k traffic collision scenarios video preprocessed by OpenCV and captioned by LLaVA</li>
+            <li>Employed 2 phrases training procedure to enhance domain relatedness and temporal consistency separately with LoRA technique on HPC</li>
+            <li>Evaluated performance of collision text-to-video generation model and achieve 0.8 Contrastive Language–Image Pretraining (CLIP) metric</li>
+        </ul>
+        <hr>
         <!-- AIQuraishi Lab -->
         <div class="container">
             <div class="subtitle">AIQuraishi Laboratory, Columbia University</div>
@@ -157,11 +186,46 @@ classes: wide
     <section class="projects section">
         <div class="section-title">Projects</div>
         <div class="container">
+            <div class="subtitle">Automated Knowledge Graph Creation for GraphRAG</div>
+            <!-- &nbsp; | &nbsp;  -->
+            <!-- &nbsp;
+            [<a href="proj-link">Details</a>] -->
+            <div class="locale">Jan 2025 – Present</div>
+        </div>
+        <ul class="bullets">
+            <li>Engineered a pipeline with 3 teammates by using LLMs to construct knowledge graph from an Amazon product dataset and store entities in Neo4j</li>
+            <li>Designed Cypher queries and applied Leiden community detection algorithms to distill context for RAG workflows developed by LangChain</li>
+            <li>Executed rigorous performance evaluation using DeepEval library, benchmarking GraphRAG pipeline against key LLM task metrics, attaining 0.58 faithfulness and 0.91 answer relevance, demonstrating improved contextual accuracy and reliability in generated responses</li>
+        </ul>
+        <div class="container">
+            <div class="subtitle">Exploration of Semantic Latent Spaces in Diffusion Models</div>
+            <!-- &nbsp; | &nbsp;  -->
+            <!-- &nbsp;
+            [<a href="proj-link">Details</a>] -->
+            <div class="locale">Sep 2024 – Dec 2024</div>
+        </div>
+        <ul class="bullets">
+            <li>Undertook literature review to explore latent space (h-space) of DDIM model and its properties to accommodate semantic manipulation</li>
+            <li>Applied 5 linear and non-linear dimension reduction algorithms (PCA, ICA, MDS, Random Projection, tSNE) to interpret and analyze latent representations within diffusion models, enhancing model interpretability and feature insights by extracting 6 main semantic dimensions</li>
+        </ul>
+        <div class="container">
             <div class="subtitle">Custom LLM Chatbots with Character-Specific Tone</div>
             <!-- &nbsp; | &nbsp;  -->
             <!-- &nbsp;
             [<a href="proj-link">Details</a>] -->
             <div class="locale">Aug 2024 – Present</div>
+        </div>
+        <ul class="bullets">
+            <li>Embedded 100k+ review texts using advanced text embedding models (BAAI) to capture nuanced customer sentiment and contextual details</li>
+            <li>Harnessed review embedding alongside product information to train 3 models (Linear Regression, Random Forest, XGBoost) to predict rating</li>
+            <li>Incorporated collaborative filtering methods including explicit/implicit/hybrid matrix factorization to build recommendation systems while realizing 0.83 recall@5 and 0.78 precision@5</li>
+        </ul>
+        <div class="container">
+            <div class="subtitle">Custom LLM Chatbots with Character-Specific Tone</div>
+            <!-- &nbsp; | &nbsp;  -->
+            <!-- &nbsp;
+            [<a href="proj-link">Details</a>] -->
+            <div class="locale">Aug 2024 – Sep 2024</div>
         </div>
         <ul class="bullets">
             <li>Scraped 100+ collections of chat datasets from public wiki websites by operating a web scraper built with BeautifulSoup and Selenium in Python</li>

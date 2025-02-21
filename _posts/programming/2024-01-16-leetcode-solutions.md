@@ -1224,9 +1224,6 @@ class Solution:
             return results
 
         return combSum(target, candidates)
-                        
-            
-        
 ```
 
 
@@ -1399,5 +1396,134 @@ class Solution:
         return ans
 ```
 
+#### [Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/)
 
+##### Strategy
+
+Recursive 
+
+##### Python3
+
+```python
+class Solution:
+    def diffWaysToCompute(self, expression: str) -> List[int]:
+        operators = ["+", "-", "*"]
+        is_pure_int = True
+        for ops in operators:
+            if ops in expression:
+                is_pure_int = False
+        if is_pure_int: 
+            return [int(expression)]
+        ans = []
+        for i in range(len(expression)):
+            c = expression[i]
+            if c in ["+", "-", "*"]:
+                for op1 in self.diffWaysToCompute(expression[:i]):
+                    for op2 in self.diffWaysToCompute(expression[i+1:]):
+                        if c == "+":
+                            ans.append(op1 + op2)
+                        elif c == "-":
+                            ans.append(op1 - op2)
+                        elif c == "*":
+                            ans.append(op1 * op2)
+        return ans
+```
+
+#### [Minimize Result by Adding Parentheses to Expression](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/)
+
+##### Strategy
+
+Brute-force
+
+##### Python3
+
+```python
+class Solution:
+    def minimizeResult(self, expression: str) -> str:
+        for i in range(len(expression)):
+            if expression[i] == "+":
+                left = expression[:i]
+                right = expression[i+1:]
+        target = int(left) + int(right)
+        s = f"({left}+{right})"
+        for i in range(len(left)):
+            op1, op2 = left[:i], left[i:]
+            if op1 == "":
+                op1 = 1
+            for j in range(1, len(right)+1):
+                op3, op4 = right[:j], right[j:]
+                if op4 == "":
+                    op4 = 1
+                ans = int(op1) * (int(op2) + int(op3)) * int(op4)
+                if ans < target:
+                    target = ans
+                    s = f"{left[:i]}({left[i:]}+{right[:j]}){right[j:]}"
+        return s
+```
+
+#### [Basic Calculator](https://leetcode.com/problems/basic-calculator/)
+
+##### Strategy
+
+Stack & queue
+
+##### python3
+
+```python
+class Solution:
+    def calculate(self, s: str) -> int:
+        def cal(num_stack, symbol_stack):
+            "calculate string without '(' and ')'"
+            ans = num_stack[0]
+            i = 1
+            for symbol in symbol_stack:
+                if symbol == '+':
+                    ans += num_stack[i]
+                elif symbol == '-':
+                    ans -= num_stack[i]
+                i += 1
+            return ans
+        
+        num_stack, symbol_stack = [], []
+        i = 0
+        num_str = ""
+        while i < len(s): 
+            c = s[i]
+            # white space
+            if c == ' ':
+                i += 1
+                continue
+            # push symbol & number
+            elif c in ['+', '-', '(', ')']:
+                if len(num_str) > 0:
+                    num_stack.append(int(num_str))
+                    num_str = ""
+                if c in ['+', '(']:
+                    symbol_stack.append(c)
+                elif c == ')':
+                    nums = [num_stack.pop()]
+                    syms = []
+                    while symbol_stack[-1] != "(":
+                        nums.append(num_stack.pop())
+                        syms.append(symbol_stack.pop())
+                    num_stack.append(cal(nums[::-1], syms[::-1]))
+                    symbol_stack.pop()
+                # '-' as symbol or negative number
+                else:
+                    symbol_stack.append(c)
+                    j = i - 1
+                    while j >= 0 and s[j] == ' ':
+                        j -= 1
+                    if j < 0 or s[j] == '(':
+                        num_stack.append(0)
+            # extract number
+            else:
+                num_str += c
+            i += 1
+        if num_str:
+            num_stack.append(int(num_str))
+        if symbol_stack:
+            num_stack.append(cal(num_stack, symbol_stack))
+        return num_stack[-1]
+```
 

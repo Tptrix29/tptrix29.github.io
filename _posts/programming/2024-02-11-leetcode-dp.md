@@ -292,7 +292,7 @@ class Solution:
 
 **Recursive Formula**
 
-$OPT[i][j] = \min\{OPT[i-1][j-1], OPT[i-1][j], OPT[i][j-1]\} + M[i][j], 0\le i, j < n$​
+$OPT[i][j] = \min\{OPT[i-1][j-1], OPT[i-1][j], OPT[i-1][j+1]\} + M[i][j], 0\le i, j < n$​
 
 $OPT[-1][j] = OPT[i][-1] = OPT[n][j] = OPT[i][n] = \infty$
 
@@ -324,13 +324,14 @@ class Solution:
 
 **Recursive Formula**
 
+$OPT[i][j]$ denotes the length of max square with $(i, j)$ as point
 $$
 OPT[i][j] = \cases{
-	0, M[0][0] == 0\\
+	0, M[i][j] == 0\\
 	\cases{
 		\min\{OPT[i-1][j], OPT[i][j-1]\} + 1, OPT[i-1][j] == OPT[i][j-1] \\
 		OPT[i-1][j] + I(OPT[i-1][j-1] \ge OPT[i-1][j])
-	}, M[0][0] == 1
+	}, M[i][j] == 1
 } 0 < i < m, 0 < j < n
 $$
 
@@ -431,7 +432,7 @@ class Solution:
 
 $DP[i][j]$ denotes the min edit distance of $word_1[:i+1]$ and $word_2[:j+1]$​​
 
-$\text{For } 0<i<|word_1|, 0<j<|word_2|$ $
+$\text{For } 0<i<|word_1|, 0<j<|word_2|$ 
 $$
 DP[i][j] = \cases{
 	DP[i-1][j-1], \text{if } word_1[i] == word_2[j]\\
@@ -653,20 +654,6 @@ class Solution:
 
 
 
-#### 
-
-**Recursive Formula**
-
-
-
-**Python3**
-
-```python
-
-```
-
-
-
 #### [Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/)
 
 **Recursive Formula**
@@ -696,6 +683,58 @@ class Solution:
         return dp[n]
 ```
 
+
+
+#### [Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)
+
+##### Recursive
+
+ $solns[i][k]$ denotes as possible tree structure with values from 1 to $k$ and $i$ as root.
+
+$solns[k] = \bigcup_i solns[i][k]$
+
+$solns[i][k] = \{[i , l , (r+i)]: l \in solns[i-1], r \in solns[k-i]\}$
+
+$solns[k] = \bigcup_i \Big(\{[i , l , (r+i)]: l \in solns[i-1], r \in solns[k-i]\}\Big), 2\le k \le n, 1\le i \le k$
+
+$solns[0] = \{[null]\}, solns[1] = \{[1]\}$
+
+##### Python3
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        def incre_tree(tree: TreeNode, x: int):
+            if tree is not None:
+                root = TreeNode(tree.val + x, tree.left, tree.right)
+                if root.left: 
+                    root.left = incre_tree(root.left, x)
+                if root.right:
+                    root.right = incre_tree(root.right, x)
+                return root
+            else:
+                return None
+        solns = [[] for _ in range(n+1)]
+        solns[0] = [None]
+        solns[1] = [TreeNode(1)]
+        for k in range(2, n+1):
+            for i in range(1, k+1):
+                for l in solns[i-1]:
+                    for r in solns[k-i]:
+                        incre_r = incre_tree(r, i)
+                        solns[k].append(TreeNode(i, l, incre_r))
+        return solns[n]
+                        
+```
+
+
+
 ### Other
 
 #### [Jump Game II](https://leetcode.com/problems/jump-game-ii/description/)
@@ -716,7 +755,7 @@ Define $DP[i]$ as the farest index you can reach within one step from any index 
 
 $DP[i] = \displaystyle \max_{k \le i}\{DP[k], i + nums[i]\}$
 
-Given $DP[k] < DP[k+1]$, so $DP[i] = \displaystyle \max\{DP[i-1], i + nums[i]\}$
+Given $DP[k] \le DP[k+1]$, so $DP[i] = \displaystyle \max\{DP[i-1], i + nums[i]\}$
 
 **Python3**
 
@@ -728,7 +767,6 @@ class Solution:
         for i in range(1, l):
             dp[i] = min([dp[k]+1 if nums[k] + k >= i else l for k in range(i)])
         return dp[-1]
-        
 ```
 
 ```python
@@ -745,4 +783,72 @@ class Solution:
         return step
         
 ```
+
+#### [Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching)
+
+##### Recursive
+
+
+
+##### Python3
+
+```python
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        l1, l2 = len(s), len(p)
+        dp = [[False for _ in range(l2+1)] for _ in range(l1+1)]
+        dp[0][0] = True
+        for j in range(2, l2+1):
+            if p[j-1] == "*":
+                dp[0][j] = dp[0][j-2]
+        for i in range(1, l1+1):
+            for j in range(1, l2+1):
+                if s[i-1] == p[j-1] or p[j-1] == '.':
+                    dp[i][j] = dp[i-1][j-1]
+                if p[j-1] == '*':
+                    dp[i][j] = dp[i][j-2]
+                    if s[i-1] == p[j-2] or p[j-2] == '.':
+                        dp[i][j] = dp[i-1][j] or dp[i][j]
+        return dp[l1][l2]
+```
+
+
+
+#### [Wildcard Matching](https://leetcode.com/problems/wildcard-matching/)
+
+##### Recursive
+
+
+
+##### Python3
+
+```python
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        l1, l2 = len(s), len(p)
+        if l2 == 0:
+            return l1 == 0
+        dp = [[False for _ in range(l2+1)] for _ in range(l1+1)]
+        dp[0][0] = True
+        for j in range(1, l2+1):
+            if p[j-1] == "*":
+                dp[0][j] = True
+            else:
+                break
+        for i in range(1, l1+1):
+            for j in range(1, l2+1):
+                if s[i-1] == p[j-1] or p[j-1] == '?':
+                    dp[i][j] = dp[i-1][j-1]
+                if p[j-1] == '*':
+                    dp[i][j] = (dp[i][j-1] or dp[i-1][j])
+        return dp[l1][l2]
+```
+
+
+
+
+
+
+
+
 
