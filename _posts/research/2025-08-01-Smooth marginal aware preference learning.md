@@ -67,11 +67,13 @@ This keeps the negative logits from deviating too far from the base policy, stab
 To make optimization smoother and differentiable (especially across batches), the authors approximate max and min using the **log-sum-exp** trick:
 
 **Smooth Maximum:**
+
 $$
 \max_i a_i \approx \frac{1}{\tau} \log \sum_i \exp(\tau a_i)
 $$
 
-Smooth Minimum:
+**Smooth Minimum:**
+
 $$
 \min_i a_i \approx -\frac{1}{\tau} \log \sum_i \exp(-\tau a_i)
 $$
