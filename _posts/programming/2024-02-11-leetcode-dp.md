@@ -402,7 +402,7 @@ $DP[i][j]$ denotes the length of longest palindromic subsequence in $s[i:j+1]$
 $$
 DP[i][j] = \cases{
 	1, i == j\\
-	DP[i+1][j] + 2, \text{if } s[i] == s[j]\\
+	DP[i+1][j-1] + 2, \text{if } s[i] == s[j]\\
 	\max\{DP[i+1][j], DP[i][j-1]\}, \text{otherwise}
 }, 0 \le i \le j < n
 $$

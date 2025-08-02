@@ -81,7 +81,8 @@ classes: wide
             <div class="timeline">Sep 2023 – Dec 2025 (Expected)</div>
         </div>
         <div class="bullets">
-        <strong>Core Courses</strong>: Machine Learning, Natural Language Processing, Algorithms for Data Science, Reinforcement Learning, Unsupervised Learning, High Performance Machine Learning, Data Science, Computer Systems for Data Science, Probability, Statistical Inference, Modern Analysis
+        <strong>Core Courses</strong>: Machine Learning, Natural Language Processing, Algorithm Analysis, Reinforcement Learning, Unsupervised Learning, High
+        Performance Machine Learning, Data Science, Computer Systems for Data Science, Probability, Statistical Inference, Scaling LLM Systems, Modern Mathematical Analysis
         </div>
         <hr>
         <!-- BS + Minor -->
@@ -90,7 +91,7 @@ classes: wide
             <div class="locale">Shanghai, CN</div>
         </div>
         <div class="container">
-            <div class="emph">B.S. in Bioinformatics, Minor in Software Engineering</div> 
+            <div class="emph">B.S. in Bioinformatics and Computer Software Engineering</div> 
             <div class="timeline">Sep 2019 – Jun 2023</div>
         </div>
         <div class="bullets">
@@ -101,14 +102,62 @@ classes: wide
     <section class="skills section">
         <div class="section-title">Skills</div>
         <ul class="bullets">
-            <li><strong>Programming:</strong> Python, R, SQL, Java, C#, shell, HTML/CSS/JavaScript</li>
-            <li><strong>Data Science:</strong> sklearn, PyTorch, TensorFlow, numpy, pandas, scipy, PySpark, HuggingFace, Transformers, PEFT, tidyverse, Shiny, Power BI</li>
-            <li><strong>Concepts:</strong> Machine Learning, Deep Learning, Natural Language Processing, Computer Vision, Object-Oriented Programming, Data Structure, RESTful API, RDBMS, NoSQL, Agile Development, Cloud Computing, EC2</li>
+            <li><strong>Machine Learning: </strong> sklearn, Regression, Bagging, Boosting, Supervised Learning, Featuring Engineering, Deep Neural Network (DNN)</li>
+            <li><strong>Deep Learning:</strong> PyTorch, Tensorflow, HugingFace, accelerate, Megetron, distributed training, Ray, Lightning, Deepspeed, Optuna, PEFT, HPC</li>
+            <li><strong>Natural Language Processing:</strong> transformers, RNN, LSTM, BERT, GPT, T5, LLaMA, LangChain, LlamaIndex, RAG, Agent, nltk, spaCy</li>
+            <li><strong>Computer Vision:</strong> diffusion, torchvision, diffusor, OpenCV, Pillow, CNN, ResNet, YOLO, UNet, DDPM/DDIM, ControlNet, ViT, CLIP, VLM</li>
+            <li><strong>Others:</strong> numpy, pandas, PySpark, Hadoop, Docker, Kubernetes, Rabbit MQ, Kafka, Flink, Neo4j, AWS, GCP, Azure, Distributed system</li>
         </ul>
     </section>
     <!-- Experience -->
     <section class="experience section">
         <div class="section-title">Experiences</div>
+        <!-- Kaliber AI MLE Intern -->
+        <div class="container">
+            <div class="subtitle">Kaliber AI</div>
+            <div class="locale">Santa Clara, CA</div>
+        </div>
+        <div class="container">
+            <div class="emph">Machine Learning Researcher Intern</div> 
+            <div class="timeline">Jun 2025 – Present</div>
+        </div>
+        <ul class="bullets">
+            <li>Achieved 99% accuracy on finetuned transformer-based model for speech recognition and 1.3x speed by TensorRT triton inference server</li>
+            <li>Finetuned ViT/ResNet-based models on image recognition tasks with 90+% accuracy while applying SAM2 to enhance tracking functionality</li>
+            <li>Integrated 3D Object Detector and tool functionalities to develop AI-agentic systems enabling robotic decision-making and task execution</li>
+        </ul>
+        <hr>
+        <!-- L’Or´ eal  -->
+        <div class="container">
+            <div class="subtitle">L’Oreal </div>
+            <div class="locale">New York City, NY</div>
+        </div>
+        <div class="container">
+            <div class="emph">Machine Learning Engineer Intern</div> 
+            <div class="timeline">Jan 2025 – May 2025</div>
+        </div>
+        <ul class="bullets">
+            <li>Led 4-team to engineer a knowledge graph RAG pipeline with 3 LLM-based methods combining OpenAI and Neo4j for product recommendation</li>
+            <li>Designed NoSQL queries with KNN and graph community detection algorithms to enhance RAG workflows to customize customer support</li>
+            <li>Attained 0.91 answer relevance and 0.58 faithfulness on question answering task when benchmarking GraphRAG pipeline using Llamaindex</li>
+        </ul>
+        <hr>
+        <!-- UAlbany -->
+        <div class="container">
+            <div class="subtitle">Department of Computer Science, UAlbany </div>
+            <div class="locale">New York City, NY</div>
+        </div>
+        <div class="container">
+            <div class="emph">Research Engineer</div> 
+            <!-- &nbsp; | &nbsp; 
+            <a href="link">Details</a>  -->
+            <div class="timeline">Apr 2025 – Present</div>
+        </div>
+        <ul class="bullets">
+            <li>Improved 8% on Exact Match and 9% F1 for multi-hop QA tasks by fine-tuning small-scale LLMs with margin-aware preference learning method</li>
+            <li>Customized 3 preference learning trainers variants based on DPO, ORPO, and CPO in trl (reinforcement learning library) for reasoning tasks</li>
+        </ul>
+        <hr>
         <!-- DSI Scholar -->
         <div class="container">
             <div class="subtitle">Data Science Institute, Columbia University</div>
@@ -129,7 +178,7 @@ classes: wide
             <div class="locale">New York City, NY</div>
         </div>
         <div class="container">
-            <div class="emph">Graduate Researcher</div> 
+            <div class="emph">Graduate Researcher in CV</div> 
             <div class="timeline">Sep 2024 – Dec 2024</div>
         </div>
         <ul class="bullets">
@@ -144,7 +193,7 @@ classes: wide
             <div class="locale">New York City, NY</div>
         </div>
         <div class="container">
-            <div class="emph">Graduate Researcher</div> 
+            <div class="emph">Graduate Researcher in NLP</div> 
             <div class="timeline">Apr 2024 – Aug 2024</div>
         </div>
         <ul class="bullets">
@@ -186,22 +235,27 @@ classes: wide
     <section class="projects section">
         <div class="section-title">Projects</div>
         <div class="container">
-            <div class="subtitle">Automated Knowledge Graph Creation for GraphRAG</div>
-            <!-- &nbsp; | &nbsp;  -->
-            <!-- &nbsp;
-            [<a href="proj-link">Details</a>] -->
-            <div class="locale">Jan 2025 – Present</div>
+            <div class="subtitle">Reinforcement Fine-Tuning for Reasoning Enhancement in LLM</div>
+            &nbsp; | &nbsp; 
+            <a href="https://github.com/sv-goat/grpo_on_math">Details</a>
+            <div class="locale">Feb 2025 - May 2025</div>
         </div>
         <ul class="bullets">
-            <li>Engineered a pipeline with 3 teammates by using LLMs to construct knowledge graph from an Amazon product dataset and store entities in Neo4j</li>
-            <li>Designed Cypher queries and applied Leiden community detection algorithms to distill context for RAG workflows developed by LangChain</li>
-            <li>Executed rigorous performance evaluation using DeepEval library, benchmarking GraphRAG pipeline against key LLM task metrics, attaining 0.58 faithfulness and 0.91 answer relevance, demonstrating improved contextual accuracy and reliability in generated responses</li>
+            <li>Incorporated 3 Reinforcement Learning algorithms such as GRPO with Causal Language Model and LoRA in PEFT for reinforcement fine-tuning</li>
+            <li>Enhanced 1.7% exact match accuracy performance of lightweight Qwen2.5 model on math reasoing task like GSM8K with trl implementation</li>
         </ul>
         <div class="container">
-            <div class="subtitle">Exploration of Semantic Latent Spaces in Diffusion Models</div>
-            <!-- &nbsp; | &nbsp;  -->
-            <!-- &nbsp;
-            [<a href="proj-link">Details</a>] -->
+            <div class="subtitle">Efficient Knowledge Distillation for Knowledge-based Tasks</div>
+            &nbsp; | &nbsp; 
+            <a href="https://github.com/Tptrix29/COMS6998_HPML_KD">Details</a>
+            <div class="locale">Feb 2025 - May 2025</div>
+        </div>
+        <ul class="bullets">
+            <li>Increased 9% performance of small models by distilling knowledge from BERT/Qwen2.5 for classifications, language modeling, summarization</li>
+            <li>Accelerated 19% running speed by Flash Attention, mixed precision, PyTorch Dynamo for training and vLLM (Page Attention) for inference</li>
+        </ul>
+        <div class="container">
+            <div class="subtitle">Controlling Generative Diffusion Models with Unsupervised Machine Learning Algorithms </div>
             <div class="locale">Sep 2024 – Dec 2024</div>
         </div>
         <ul class="bullets">
@@ -210,10 +264,7 @@ classes: wide
         </ul>
         <div class="container">
             <div class="subtitle">Custom LLM Chatbots with Character-Specific Tone</div>
-            <!-- &nbsp; | &nbsp;  -->
-            <!-- &nbsp;
-            [<a href="proj-link">Details</a>] -->
-            <div class="locale">Aug 2024 – Present</div>
+            <div class="locale">Aug 2024 – Oct 2024</div>
         </div>
         <ul class="bullets">
             <li>Embedded 100k+ review texts using advanced text embedding models (BAAI) to capture nuanced customer sentiment and contextual details</li>
@@ -221,21 +272,9 @@ classes: wide
             <li>Incorporated collaborative filtering methods including explicit/implicit/hybrid matrix factorization to build recommendation systems while realizing 0.83 recall@5 and 0.78 precision@5</li>
         </ul>
         <div class="container">
-            <div class="subtitle">Custom LLM Chatbots with Character-Specific Tone</div>
-            <!-- &nbsp; | &nbsp;  -->
-            <!-- &nbsp;
-            [<a href="proj-link">Details</a>] -->
-            <div class="locale">Aug 2024 – Sep 2024</div>
-        </div>
-        <ul class="bullets">
-            <li>Scraped 100+ collections of chat datasets from public wiki websites by operating a web scraper built with BeautifulSoup and Selenium in Python</li>
-            <li>Fine-tuned 3 state-of-the-art LLMs like LLaMA leveraging LoRA technique on the HuggingFace/PEFT platform to tailor specific tone of chatbot</li>
-            <li>Constructed RESTful API with FastAPI as backend and a multi-page app with Streamlit as frontend for interactive usage of customized models</li>
-        </ul>
-        <div class="container">
             <div class="subtitle">Billionaire Omics</div>
-            &nbsp;
-            [<a href="https://sitianzhou.github.io/BillionaireOmics/">Details</a>]
+            &nbsp; | &nbsp;
+            <a href="https://sitianzhou.github.io/BillionaireOmics/">Details</a>
             <div class="locale">Nov 2023 – Dec 2023</div>
         </div>
         <ul class="bullets">
